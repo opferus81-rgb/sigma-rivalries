@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wer ist der größte Sigma? 🏆</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>">
+<style>
+:root{--bg1:#fff3b0;--bg2:#ffc2ef;--bg3:#b9ecff;--sf:rgba(255,255,255,.9);--tx:#2a1740;--mu:#6b5a80;--tr:rgba(42,23,64,.14)}
+@media(prefers-color-scheme:dark){:root{--bg1:#2b1055;--bg2:#5a1a5e;--bg3:#0f3a63;--sf:rgba(30,18,52,.9);--tx:#fff1ff;--mu:#cdb8e6;--tr:rgba(255,255,255,.16)}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg1) linear-gradient(120deg,var(--bg1),var(--bg2),var(--bg3),var(--bg1));background-size:300% 300%;animation:bg 14s ease-in-out infinite;overflow-x:hidden;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+body.party{animation:bg 3s linear infinite,hue 4s linear infinite}
+@keyframes bg{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+main{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:20px 14px 90px}
+h1{margin:6px 0;text-align:center;font-size:clamp(30px,7vw,58px);line-height:1.1;font-weight:900}
+h1 span{display:inline-block;animation:wave 1.8s ease-in-out infinite}
+@keyframes wave{50%{transform:translateY(-9px) rotate(4deg)}}
+h3{text-align:center;margin:34px 0 14px;font-size:26px}
+.sub{text-align:center;color:var(--mu);margin:4px 0 14px}
+.tick{overflow:hidden;white-space:nowrap;background:var(--sf);border-radius:99px;padding:9px 0;margin:10px 0;font-weight:700;border:3px solid #ff9f1c}
+.tick div{display:inline-block;padding-left:100%;animation:mq 22s linear infinite}
+@keyframes mq{to{transform:translateX(-100%)}}
+.note{background:#ff3b6b;color:#fff;text-align:center;font-weight:800;padding:10px;border-radius:14px;margin:10px 0;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{transform:scale(1.03)}}
+.bar2{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.pill{border:0;border-radius:99px;padding:10px 16px;font:800 15px system-ui,sans-serif;cursor:pointer;color:#fff;background:linear-gradient(135deg,#6c5cff,#d94dff);box-shadow:0 4px 0 #3b2fa8;transition:transform .08s}
+.pill:active{transform:translateY(4px) scale(.93);box-shadow:none}
+.podium{display:flex;justify-content:center;align-items:flex-end;gap:10px;height:250px;margin:0 auto;max-width:520px}
+.pod{flex:1;text-align:center;font-weight:900}
+.pod .blk{border-radius:16px 16px 0 0;display:flex;align-items:flex-start;justify-content:center;font-size:34px;padding-top:8px;transition:height 1s cubic-bezier(.2,1.5,.4,1);color:#fff;text-shadow:0 2px 3px rgba(0,0,0,.4)}
+.pod .nm{font-size:18px;margin-bottom:4px}.pod .em{font-size:40px;animation:bob 2s ease-in-out infinite;display:block}
+@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
+.donutw{display:flex;gap:24px;align-items:center;justify-content:center;flex-wrap:wrap}
+#donut{width:200px;height:200px;border-radius:50%;box-shadow:0 8px 0 rgba(0,0,0,.15);animation:spin 20s linear infinite;position:relative}
+#donut::after{content:"";position:absolute;inset:48px;border-radius:50%;background:var(--sf)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.leg{display:grid;gap:4px;font-weight:700}.leg i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:34px 18px}
+.card{position:relative;height:370px;perspective:1000px;-webkit-tap-highlight-color:transparent}
+.in{position:absolute;inset:0;transition:transform .7s cubic-bezier(.3,1.4,.5,1);transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--sf);border:4px solid hsl(var(--h) 95% 58%);border-radius:26px;padding:22px 14px 14px;text-align:center;box-shadow:0 8px 0 hsl(var(--h) 85% 45%/.55);display:flex;flex-direction:column;overflow:hidden}
+.back{transform:rotateY(180deg);text-align:left;font-size:14px;gap:5px}
+.back b{color:hsl(var(--h) 80% 40%)}
+.crown{position:absolute;top:-28px;left:50%;font-size:40px;transform:translateX(-50%) scale(0);transition:transform .5s cubic-bezier(.3,1.9,.5,1);z-index:3}
+.lead .crown{transform:translateX(-50%) scale(1) rotate(-8deg)}
+.emo{font-size:50px;display:inline-block;animation:bob 2.4s ease-in-out infinite}
+.card h2{margin:4px 0 0;font-size:24px}.nick{color:var(--mu);font-size:14px;margin-bottom:4px}
+.bar{height:16px;border-radius:99px;background:var(--tr);overflow:hidden;margin:8px 0 4px}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,hsl(var(--h) 95% 58%),hsl(calc(var(--h) + 55) 95% 58%));transition:width .9s cubic-bezier(.2,1.4,.4,1)}
+.meta{color:var(--mu);font-size:15px;margin-bottom:8px}.meta b{font-size:24px;color:var(--tx)}
+.btns{margin-top:auto;display:grid;gap:8px}
+button.vote,button.info{position:relative;overflow:hidden;border:0;border-radius:14px;padding:13px 8px;font:800 16px system-ui,sans-serif;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45);cursor:pointer;background:linear-gradient(135deg,hsl(var(--h) 85% 42%),hsl(calc(var(--h) + 40) 85% 40%));box-shadow:0 5px 0 hsl(var(--h) 80% 28%);transition:transform .08s,box-shadow .08s}
+button.info{background:var(--tr);color:var(--tx);text-shadow:none;box-shadow:0 4px 0 var(--tr);padding:9px}
+button:active{transform:translateY(5px) scale(.93) rotate(-2deg)!important;box-shadow:none!important}
+button:disabled{opacity:.5;cursor:not-allowed}
+.boing{animation:boing .65s}
+@keyframes boing{25%{transform:scale(1.22) rotate(-6deg)}45%{transform:scale(.88) rotate(5deg)}65%{transform:scale(1.1) rotate(-2deg)}}
+.mine .front{outline:5px solid hsl(var(--h) 100% 68%);outline-offset:3px}
+.st{display:grid;grid-template-columns:50px 1fr 28px;gap:6px;align-items:center;font-size:13px}
+.st .bar{margin:0;height:10px}
+.rip{position:absolute;width:160px;height:160px;margin:-80px 0 0 -80px;border-radius:50%;background:rgba(255,255,255,.65);transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(1.6);opacity:0}}
+.aura{display:block;margin:0 auto;font-size:22px;padding:22px 30px}
+.meter{height:22px;border-radius:99px;background:var(--tr);overflow:hidden;max-width:420px;margin:12px auto}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3ddc84,#ffe14d,#ff3b6b);transition:width .15s}
+.cc{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:start}
+.orbw{text-align:center}
+.orb{width:210px;height:210px;border-radius:50%;border:8px solid #ffe14d;font-size:100px;cursor:pointer;background:radial-gradient(circle at 35% 30%,#fff7b0,#ff9f1c 55%,#ff3b6b);box-shadow:0 0 40px #ffb703,0 10px 0 #b45309;animation:orb 2s ease-in-out infinite;user-select:none;-webkit-tap-highlight-color:transparent}
+.orb:active{transform:scale(.9)!important;box-shadow:0 0 70px #ffe14d!important}
+@keyframes orb{50%{transform:scale(1.05) rotate(3deg)}}
+.big{font-size:44px;font-weight:900;margin-top:10px}
+.shop{display:grid;gap:8px}
+.up{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;text-align:left;border:3px solid var(--tr);background:var(--sf);color:var(--tx);border-radius:14px;padding:10px;cursor:pointer;font:600 14px system-ui,sans-serif}
+.up:disabled{opacity:.45;cursor:not-allowed}.up:not(:disabled){border-color:#3ddc84}
+.up .ic{font-size:28px}.up small{display:block;color:var(--mu);font-weight:400}.up b.pr{white-space:nowrap}
+.gold{position:fixed;z-index:95;font-size:56px;border:0;background:none;cursor:pointer;animation:gold .8s ease-in-out infinite alternate;filter:drop-shadow(0 0 14px gold)}
+@keyframes gold{to{transform:scale(1.25) rotate(15deg)}}
+body.trip main{animation:warp 5s ease-in-out infinite,hue 6s linear infinite}
+body.trip::before{content:"";position:fixed;inset:-50%;z-index:0;pointer-events:none;background:conic-gradient(#f0f,#0ff,#ff0,#f0f);opacity:.28;mix-blend-mode:overlay;animation:spin 10s linear infinite}
+body.trip .card{animation:wob 3s ease-in-out infinite}body.trip h3{animation:wob 2s ease-in-out infinite}
+@keyframes warp{0%,100%{transform:skew(0) scale(1)}25%{transform:skew(2deg,-1deg) scale(1.015)}75%{transform:skew(-2deg,1deg) scale(.985)}}
+@keyframes wob{50%{transform:rotate(2.5deg) scale(1.04)}}
+.rz{display:flex;gap:14px;align-items:center;background:var(--sf);border:4px solid #ff3b6b;border-radius:20px;padding:14px;margin:10px auto;max-width:560px;animation:pop .4s cubic-bezier(.3,1.7,.5,1)}
+.rz[hidden]{display:none}.rz .em2{font-size:54px;animation:bob 1.6s ease-in-out infinite}.rz>div:last-child{flex:1}.rz .pl{display:block;margin-top:6px;color:var(--mu)}
+.gmb{background:var(--sf);border:4px solid #6c5cff;border-radius:20px;padding:16px;max-width:620px;margin:0 auto;text-align:center;min-height:200px;animation:pop .4s cubic-bezier(.3,1.7,.5,1)}
+.gmb select{padding:10px;border-radius:10px;border:2px solid var(--tr);background:var(--sf);color:var(--tx);font:inherit;margin:4px}
+.mg,.mg3{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}.mg3{grid-template-columns:repeat(3,1fr)}
+.mc{height:64px;font-size:30px;border:0;border-radius:12px;background:var(--tr);cursor:pointer;color:var(--tx)}
+.ans{display:block;width:100%;margin:6px 0;text-align:left}
+.status{text-align:center;margin-top:26px;color:var(--mu);font-size:14px}
+
+/* Timgioh-Bosskampf: Arena, Treffer, Phasen und Spezialeffekte */
+.boss-arena{position:relative;isolation:isolate;overflow:hidden;border:3px solid #8b5cf6;border-radius:22px;padding:16px;color:#fff;background:radial-gradient(ellipse at 50% 10%,#55218a,#170d35 60%,#080817);box-shadow:inset 0 0 45px #a855f766,0 0 30px #7c3aed66}
+.boss-arena:before{content:"";position:absolute;inset:-50%;z-index:-1;background:conic-gradient(from 0deg,transparent,#9333ea66,transparent,#22d3ee55,transparent);animation:bossSpin 12s linear infinite}
+@keyframes bossSpin{to{transform:rotate(360deg)}}
+.boss-top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-weight:900;color:#fef08a}
+.boss-stage{position:relative;min-height:230px;display:grid;place-items:center;margin:8px 0;overflow:hidden;border-radius:18px;background:linear-gradient(#120d2c99,#09091dcc),radial-gradient(circle at 50% 70%,#7c3aed,#111827 70%)}
+.boss-stage:after{content:"";position:absolute;bottom:12px;width:80%;height:18px;border-radius:50%;background:#a855f7aa;filter:blur(13px);animation:bossPulse 1.3s infinite alternate}
+@keyframes bossPulse{to{transform:scaleX(.65);opacity:.5}}
+.boss-villain{position:relative;z-index:1;font-size:clamp(90px,18vw,150px);filter:drop-shadow(0 0 18px #c084fc);animation:bossFloat 2s ease-in-out infinite}
+@keyframes bossFloat{50%{transform:translateY(-14px) scale(1.04)}}
+.boss-arena.hit .boss-villain{animation:bossHit .32s ease}
+@keyframes bossHit{25%{transform:translateX(-18px) rotate(-9deg);filter:brightness(3) drop-shadow(0 0 30px #fff)}70%{transform:translateX(14px) rotate(8deg)}}
+.boss-arena.phase2{border-color:#f97316;background:radial-gradient(ellipse at 50% 10%,#8a251b,#260d23 60%,#090817)}
+.boss-arena.phase3{border-color:#facc15;background:radial-gradient(ellipse at 50% 10%,#854d0e,#311047 60%,#080817);box-shadow:0 0 40px #facc1588}
+.boss-bar{height:17px;border-radius:99px;background:#ffffff30;overflow:hidden;margin:5px 0 10px}
+.boss-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ef4444,#f97316,#facc15);transition:width .25s}
+.boss-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:left;font-weight:800}
+.boss-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.boss-actions button{min-height:54px;border:0;border-radius:13px;color:white;font-weight:900;font-size:14px;background:linear-gradient(135deg,#7c3aed,#2563eb);box-shadow:0 4px 0 #24105c;cursor:pointer}
+.boss-actions button:disabled{opacity:.35;filter:grayscale(1)}
+.boss-log{min-height:44px;margin-top:10px;padding:10px;border-radius:12px;background:#ffffff16;font-weight:800}
+.boss-timer{font-size:26px;font-weight:1000;color:#fde68a}
+.boss-flash{animation:bossFlash .25s ease}
+@keyframes bossFlash{50%{filter:brightness(2.2)}}
+@media(max-width:460px){.boss-actions{grid-template-columns:1fr}.boss-stage{min-height:190px}}
+
+
+/* Timgioh-Bosskampf – Cinematic Overhaul */
+.boss-arena{border:2px solid #a78bfa;background:radial-gradient(ellipse at 50% 8%,#44206e 0,#17102e 42%,#050611 100%);box-shadow:inset 0 0 70px #8b5cf655,0 0 38px #7c3aed88;transition:background .7s,border-color .7s}
+.boss-arena:before{background:conic-gradient(from 0deg,transparent,#c084fc88,transparent,#22d3ee66,transparent,#fb718566,transparent);animation:bossSpin 7s linear infinite}
+.boss-stage{min-height:300px;background:radial-gradient(ellipse at 50% 82%,#a855f755,transparent 45%),linear-gradient(180deg,#090817aa,#080613),repeating-linear-gradient(90deg,#ffffff08 0 1px,transparent 1px 54px);border:1px solid #c4b5fd55;box-shadow:inset 0 0 55px #02020a}
+.boss-stage:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,#c4b5fd12 50%,transparent 65%);animation:arenaScan 4s linear infinite}
+.boss-stage:after{width:58%;height:24px;bottom:25px;background:#c084fc;filter:blur(19px);box-shadow:0 0 45px 18px #7c3aed88}
+@keyframes arenaScan{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.boss-villain{font-size:clamp(112px,22vw,178px);filter:drop-shadow(0 0 12px #e9d5ff) drop-shadow(0 0 32px #a855f7);animation:bossHover 2.4s ease-in-out infinite;transform-origin:50% 75%;z-index:3}
+@keyframes bossHover{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-17px) scale(1.06)}}
+.boss-villain:after{content:"";position:absolute;inset:12% 16%;border-radius:50%;box-shadow:0 0 30px 8px #c084fc66;z-index:-1;animation:corePulse 1.4s ease-in-out infinite alternate}
+@keyframes corePulse{to{transform:scale(1.35);opacity:.35}}
+.boss-arena.hit .boss-villain{animation:bossImpact .42s cubic-bezier(.2,.8,.2,1)}
+@keyframes bossImpact{0%{transform:translateX(0) rotate(0) scale(1)}25%{transform:translateX(-25px) rotate(-12deg) scale(1.13);filter:brightness(3) drop-shadow(0 0 38px white)}60%{transform:translateX(19px) rotate(9deg)}100%{transform:translateX(0) rotate(0) scale(1)}}
+.boss-arena.boss-charging .boss-villain{animation:bossCharge .85s ease-in-out infinite alternate;filter:drop-shadow(0 0 20px #fb7185) drop-shadow(0 0 48px #ef4444)}
+@keyframes bossCharge{to{transform:scale(1.2) translateY(-12px);filter:brightness(1.8) drop-shadow(0 0 65px #ef4444)}}
+.boss-arena.cinematic .boss-stage{animation:stageCine .65s ease}
+@keyframes stageCine{35%{filter:brightness(2.2) saturate(1.8);transform:scale(1.015)}70%{filter:contrast(1.4)}}
+.boss-arena.ultimate-mode .boss-stage{box-shadow:inset 0 0 100px #f0abfc,0 0 35px #c084fc}
+.boss-arena.phase2{border-color:#fb923c;background:radial-gradient(ellipse at 50% 8%,#7c271c,#210b20 65%,#050611)}
+.boss-arena.phase3{border-color:#facc15;background:radial-gradient(ellipse at 50% 8%,#713f12,#2b1042 55%,#050611);box-shadow:0 0 55px #facc15aa,inset 0 0 75px #f9731688}
+.boss-arena.phase3 .boss-stage{background:radial-gradient(ellipse at 50% 80%,#f9731655,transparent 48%),linear-gradient(180deg,#1b0714,#090611)}
+.boss-bar{height:19px;border:1px solid #ffffff35;background:#05050caa;box-shadow:inset 0 2px 5px #000}
+.boss-bar i{box-shadow:0 0 12px currentColor}
+.boss-actions button{min-height:62px;background:linear-gradient(135deg,#6d28d9,#312e81);border:1px solid #c4b5fd88;box-shadow:0 5px 0 #1e124b,0 0 14px #7c3aed44;transition:transform .15s,filter .15s}
+.boss-actions button:not(:disabled):active{transform:translateY(3px) scale(.98);box-shadow:0 1px 0 #1e124b}
+.boss-log{min-height:68px;border:1px solid #c4b5fd66;background:linear-gradient(120deg,#25113fdd,#0d1025dd);box-shadow:inset 0 0 18px #8b5cf633;line-height:1.45}
+.boss-label{font-size:clamp(22px,5vw,42px);font-weight:1000;letter-spacing:.08em;text-shadow:0 0 12px #fff,0 0 32px #c084fc;animation:bossTitle .9s ease both}
+@keyframes bossTitle{0%{opacity:0;transform:scale(.45) translateY(25px)}35%{opacity:1;transform:scale(1.18)}100%{opacity:0;transform:scale(1.05) translateY(-25px)}}
+.shockwave{position:absolute;width:35px;height:35px;border:4px solid #e9d5ff;border-radius:50%;box-shadow:0 0 24px #c084fc;animation:bossWave .8s ease-out forwards;pointer-events:none}
+@keyframes bossWave{to{transform:scale(11);opacity:0;border-width:1px}}
+.boss-quote{font-size:12px;color:#ddd6fe;letter-spacing:.12em;text-transform:uppercase;margin:3px 0 8px}
+.boss-arena .boss-timer{font-variant-numeric:tabular-nums;text-shadow:0 0 16px #facc15}
+@media(prefers-reduced-motion:reduce){.boss-arena:before,.boss-stage:before,.boss-stage:after,.boss-villain,.boss-villain:after{animation:none!important}}
+
+/* Neue Spielhallen-Effekte */
+.gmb{position:relative;overflow:hidden;box-shadow:0 12px 35px rgba(45,20,90,.14);transition:box-shadow .3s,transform .3s}
+.gmb:has(.race-track){max-width:900px;background:linear-gradient(180deg,#b8edff,#e8ffd6 62%,#9ad36c);color:#17351c}
+.gmb button,.pill{transition:transform .18s cubic-bezier(.2,1.5,.4,1),filter .2s,box-shadow .2s}
+.gmb button:hover,.pill:hover{filter:brightness(1.12);transform:translateY(-2px)}
+.race-track{position:relative;display:grid;gap:9px;margin:14px 0;padding:12px;border:3px solid #fff;border-radius:18px;background:repeating-linear-gradient(0deg,#b9e98d 0 34px,#a9dc79 34px 68px);box-shadow:inset 0 0 18px #4c8c3a55;overflow:hidden}
+.race-lane{height:52px;position:relative;border-bottom:2px dashed #ffffffaa}
+.race-lane:last-child{border:0}
+.race-horse{position:absolute;left:0;top:0;font-size:37px;filter:drop-shadow(0 4px 2px #3458);transform:scaleX(-1);transition:left .12s linear;animation:horseGallop .28s ease-in-out infinite alternate}
+@keyframes horseGallop{to{transform:scaleX(-1) translateY(-5px) rotate(-5deg)}}
+.race-finish{position:absolute;right:12px;top:0;bottom:0;width:9px;background:repeating-linear-gradient(0deg,#fff 0 8px,#222 8px 16px);opacity:.9}
+.race-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-weight:800}
+.race-bet{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin:10px 0}
+.race-bet input{width:110px;padding:10px;border-radius:10px;border:2px solid #6b9d4c;font:700 16px system-ui}
+.race-result{font-size:clamp(20px,4vw,30px);font-weight:1000;min-height:42px;text-shadow:0 2px 0 #fff8}
+.gmb .race-btn{background:linear-gradient(135deg,#ffb703,#fb5607);box-shadow:0 5px 0 #a33b08;color:white}
+.music-live{animation:musicGlow 2s ease-in-out infinite alternate}
+@keyframes musicGlow{to{box-shadow:0 0 22px #ffcf33,0 0 42px #a855f7;filter:brightness(1.15)}}
+
+/* Individuelle Persona-Animationen */
+.card .emo{display:inline-block;transform-origin:50% 85%}
+.persona-rene .emo{animation:wolfHowl 2.8s ease-in-out infinite}
+.persona-timo .emo{animation:stoneStill 3.4s steps(2,end) infinite}
+.persona-ubeyd .emo{animation:rizzFlash 2.2s ease-in-out infinite}
+.persona-michael .emo{animation:phoenix 1.8s ease-in-out infinite}
+.persona-kolja .emo{animation:lightningDash 1.5s ease-in-out infinite}
+.persona-florian .emo{animation:powerFlex 2.5s ease-in-out infinite}
+.persona-max .emo{animation:brainWave 2.6s ease-in-out infinite}
+@keyframes wolfHowl{0%,100%{transform:rotate(0) translateY(0)}35%{transform:rotate(-12deg) translateY(-7px)}65%{transform:rotate(8deg) translateY(-3px)}}
+@keyframes stoneStill{0%,88%,100%{transform:translateY(0)}90%{transform:translateY(-2px)}92%{transform:translateY(0)}}
+@keyframes rizzFlash{0%,100%{transform:rotate(-8deg) scale(1)}50%{transform:rotate(8deg) scale(1.2);filter:drop-shadow(0 0 9px #ffe66d)}}
+@keyframes phoenix{0%,100%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0 #ff6b00)}50%{transform:translateY(-8px) scale(1.12);filter:drop-shadow(0 0 12px #ff6b00)}}
+@keyframes lightningDash{0%,100%{transform:translateX(0) skew(0)}35%{transform:translateX(5px) skew(-12deg)}45%{transform:translateX(-4px) skew(10deg)}}
+@keyframes powerFlex{0%,100%{transform:scale(1)}40%{transform:scale(1.16, .9)}60%{transform:scale(.94,1.12)}}
+@keyframes brainWave{0%,100%{transform:rotate(0) scale(1)}30%{transform:rotate(-10deg) scale(1.08)}60%{transform:rotate(10deg) scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.card .emo{animation:none!important}}
+
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:80}
+.fl{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.fl span{position:absolute;bottom:-60px;opacity:.5;animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-120vh) rotate(360deg)}}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));z-index:90;transform:translate(-50%,200%);padding:14px 22px;border-radius:99px;font-weight:800;background:var(--tx);color:var(--bg1);max-width:90vw;text-align:center;transition:transform .45s cubic-bezier(.3,1.7,.5,1)}
+.toast.on{transform:translate(-50%,0)}
+.fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:52px;height:52px;border-radius:50%;border:0;font-size:24px;background:var(--sf);cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.mo{position:fixed;inset:0;z-index:100;background:rgba(10,5,25,.7);display:none;align-items:center;justify-content:center;padding:14px}
+.mo.on{display:flex}
+.box{background:var(--sf);color:var(--tx);border-radius:24px;padding:20px;width:100%;max-width:560px;max-height:90vh;overflow:auto;border:4px solid #6c5cff;animation:pop .4s cubic-bezier(.3,1.7,.5,1)}
+@keyframes pop{from{transform:scale(.6);opacity:0}}
+.box h4{margin:16px 0 8px;font-size:18px}
+.box input,.box select{width:100%;padding:10px;border-radius:10px;border:2px solid var(--tr);background:transparent;color:var(--tx);font:inherit;margin:4px 0}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:6px 0}
+.row .pill{padding:6px 12px}
+.vl{max-height:150px;overflow:auto;font-size:13px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.fl{display:none}}
+
+/* Individuelle Profil-Animationen */
+.persona-rene .emo{animation:howl 2.2s ease-in-out infinite}
+.persona-timo .emo{animation:stone 3.2s steps(2,end) infinite}
+.persona-ubeyd .emo{animation:cool 2.5s ease-in-out infinite}
+.persona-michael .emo{animation:flame 1.4s ease-in-out infinite alternate}
+.persona-kolja .emo{animation:zap .8s steps(2,end) infinite}
+.persona-florian .emo{animation:flex 2s ease-in-out infinite}
+.persona-max .emo{animation:brain 2.8s ease-in-out infinite}
+@keyframes howl{0%,100%{transform:rotate(0) translateY(0)}35%{transform:rotate(-16deg) translateY(-8px)}65%{transform:rotate(12deg)}}
+@keyframes stone{0%,85%,100%{transform:translateY(0)}90%{transform:translateY(-3px)}}
+@keyframes cool{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(9deg);filter:drop-shadow(0 0 10px #ffe66d)}}
+@keyframes flame{from{transform:scale(1) rotate(-5deg);filter:drop-shadow(0 0 2px #ff6b00)}to{transform:scale(1.13) rotate(5deg);filter:drop-shadow(0 0 15px #ff3b00)}}
+@keyframes zap{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px) skew(-8deg)}50%{transform:translateX(5px) skew(8deg)}}
+@keyframes flex{0%,100%{transform:scale(1)}50%{transform:scale(1.15) rotate(-8deg)}}
+@keyframes brain{0%,100%{transform:rotate(0) translateY(0)}50%{transform:rotate(8deg) translateY(-7px)}}
+.profile-info{width:min(620px,100%);max-height:90vh;overflow:auto;border:4px solid hsl(var(--h) 95% 58%);border-radius:26px;padding:22px;background:var(--sf);color:var(--tx);box-shadow:0 12px 40px #0008;animation:pop .35s cubic-bezier(.3,1.7,.5,1)}
+.profile-info .hero{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.profile-info .hero .big-emoji{font-size:64px;display:inline-block}
+.profile-info .hero h2{margin:0;font-size:28px}.profile-info .tagline{color:var(--mu);font-weight:700}
+.profile-info .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:9px}
+.profile-info .info-item{padding:10px 12px;border-radius:13px;background:var(--tr);overflow-wrap:anywhere}
+.profile-info .info-item b{display:block;font-size:12px;color:var(--mu);margin-bottom:3px}
+.profile-info .stats{margin:14px 0}.profile-info .statline{display:grid;grid-template-columns:64px 1fr 28px;gap:8px;align-items:center;margin:8px 0;font-size:13px}
+.profile-info .statline .track{height:10px;border-radius:20px;background:var(--tr);overflow:hidden}.profile-info .statline .track i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,hsl(var(--h) 95% 58%),hsl(calc(var(--h) + 55) 95% 58%))}
+.profile-info .close-profile{margin-top:14px;width:100%}
+.profile-info .origin{font-weight:800;color:hsl(var(--h) 80% 42%)}
+
+
+/* CINEMATIC CHARACTER LORE */
+.profile-info{position:relative;isolation:isolate;overflow-x:hidden;overflow-y:auto;border-width:5px;box-shadow:0 0 0 2px #ffffff22,0 0 28px hsl(var(--h) 100% 60%/.55),0 0 90px hsl(var(--h) 100% 55%/.28);animation:profileDrop .75s cubic-bezier(.12,1.6,.3,1) both}
+@keyframes profileDrop{0%{opacity:0;transform:perspective(900px) rotateX(35deg) scale(.25) translateY(100px);filter:blur(14px)}55%{opacity:1;transform:perspective(900px) rotateX(-8deg) scale(1.04);filter:blur(0)}100%{transform:perspective(900px) rotateX(0) scale(1)}}
+.profile-info:before,.profile-info:after{content:"";position:absolute;pointer-events:none;z-index:-1;border-radius:50%;inset:-45%;background:conic-gradient(transparent 0 18%,hsl(var(--h) 100% 65%/.3) 24%,transparent 34% 58%,#fff4 64%,transparent 75%);animation:loreSpin 8s linear infinite}
+.profile-info:after{inset:8%;border:2px dashed hsl(var(--h) 100% 75%/.35);background:none;animation:loreSpin 16s linear infinite reverse}
+@keyframes loreSpin{to{transform:rotate(360deg)}}
+.profile-info .hero{position:relative;z-index:1;padding:12px;border-radius:18px;background:linear-gradient(110deg,hsl(var(--h) 75% 40%/.25),transparent);overflow:hidden}
+.profile-info .hero:after{content:"";position:absolute;inset:-100% auto -100% -30%;width:25%;background:#fff8;transform:rotate(22deg);animation:lightSweep 3s ease-in-out infinite}
+@keyframes lightSweep{0%,35%{left:-35%}75%,100%{left:130%}}
+.profile-info .hero .big-emoji{font-size:clamp(72px,18vw,112px);filter:drop-shadow(0 0 12px hsl(var(--h) 100% 65%));animation:heroPulse 1.8s ease-in-out infinite}
+@keyframes heroPulse{0%,100%{transform:translateY(0) scale(1) rotate(-5deg)}50%{transform:translateY(-14px) scale(1.22) rotate(8deg);filter:drop-shadow(0 0 28px hsl(var(--h) 100% 65%))}}
+.profile-info .chapter{font-weight:1000;letter-spacing:.08em;text-transform:uppercase;color:hsl(var(--h) 90% 65%);margin:16px 0 6px;text-shadow:0 0 16px hsl(var(--h) 100% 60%/.6)}
+.profile-info .story{font-size:15px;line-height:1.65;padding:15px;border-radius:17px;background:linear-gradient(135deg,var(--tr),transparent);border:1px solid hsl(var(--h) 100% 70%/.35);box-shadow:inset 0 0 22px hsl(var(--h) 100% 60%/.12)}
+.profile-info .ultimate{margin:12px 0;padding:14px;text-align:center;border-radius:16px;background:linear-gradient(100deg,hsl(var(--h) 85% 40%),#32105d,#111);color:#fff;font-weight:1000;letter-spacing:.07em;animation:ultimateGlow 1.4s ease-in-out infinite alternate}
+@keyframes ultimateGlow{to{filter:brightness(1.5);transform:scale(1.025);box-shadow:0 0 38px hsl(var(--h) 100% 65%/.8)}}
+.profile-info .info-item{transition:transform .25s,filter .25s;animation:tileIn .55s both;animation-delay:calc(var(--tile,0)*55ms)}
+.profile-info .info-item:hover{transform:translateY(-4px) rotate(-1deg);filter:brightness(1.2)}
+@keyframes tileIn{from{opacity:0;transform:translateY(20px) scale(.85)}to{opacity:1;transform:none}}
+.profile-info .weakness{border:1px dashed #ff7b7b;background:#ff45451a}
+.profile-info .close-profile{animation:closeThrob 1.5s infinite alternate}
+@keyframes closeThrob{to{box-shadow:0 0 22px hsl(var(--h) 100% 60%/.7);filter:brightness(1.2)}}
+.profile-info.persona-rene .big-emoji{animation:wolfCine 1.45s infinite}.profile-info.persona-rene:before{background:conic-gradient(transparent,#dbeafe88,transparent,#94a3b888,transparent)}
+@keyframes wolfCine{0%,100%{transform:translateY(0) rotate(-12deg) scale(1)}25%{transform:translateY(-22px) rotate(18deg) scale(1.3)}45%{transform:translateY(3px) rotate(-8deg) scale(.92)}70%{transform:translateY(-12px) rotate(8deg) scale(1.16)}}
+.profile-info.persona-timo .big-emoji{animation:stoneCine 2.8s steps(2,end) infinite}.profile-info.persona-timo:before{background:conic-gradient(transparent,#94a3b888,transparent,#e2e8f088,transparent)}
+@keyframes stoneCine{0%,78%,100%{transform:translateY(0) scale(1)}82%{transform:translateY(-18px) scale(1.25) rotate(4deg);filter:drop-shadow(0 0 28px #cbd5e1)}86%{transform:translateY(4px) scale(.9)}90%{transform:translateY(0) scale(1.08)}}
+.profile-info.persona-ubeyd .big-emoji{animation:ubeydCine 1.9s infinite}.profile-info.persona-ubeyd:before{background:conic-gradient(transparent,#facc1588,transparent,#38bdf888,transparent)}
+@keyframes ubeydCine{0%,100%{transform:translateY(0) rotate(-15deg) scale(1)}35%{transform:translateY(-17px) rotate(12deg) scale(1.28);filter:drop-shadow(0 0 32px #facc15)}55%{transform:translateY(0) rotate(0) scale(.95)}75%{transform:translateY(-8px) rotate(8deg) scale(1.15)}}
+.profile-info.persona-michael .big-emoji{animation:michaelCine 1.15s infinite alternate}.profile-info.persona-michael:before{background:conic-gradient(transparent,#fb923caa,transparent,#ef4444aa,transparent)}
+@keyframes michaelCine{from{transform:scale(.9) rotate(-10deg);filter:drop-shadow(0 0 5px #f97316)}to{transform:scale(1.38) rotate(12deg);filter:drop-shadow(0 0 34px #ef4444)}}
+.profile-info.persona-kolja .big-emoji{animation:koljaCine .65s steps(2,end) infinite}.profile-info.persona-kolja:before{background:conic-gradient(transparent,#38bdf8aa,transparent,#f8fafcaa,transparent)}
+@keyframes koljaCine{0%,100%{transform:translate(0) skew(0) scale(1)}20%{transform:translate(20px,-8px) skew(-25deg) scale(1.2)}40%{transform:translate(-18px,4px) skew(20deg) scale(.9)}60%{transform:translate(10px,-14px) skew(-12deg) scale(1.25)}80%{transform:translate(-5px,0) scale(1)}}
+.profile-info.persona-florian .big-emoji{animation:florianCine 1.8s infinite}.profile-info.persona-florian:before{background:conic-gradient(transparent,#22c55e99,transparent,#a3e63599,transparent)}
+@keyframes florianCine{0%,100%{transform:scale(1) rotate(0)}25%{transform:scale(1.28,.82) rotate(-8deg)}50%{transform:scale(.88,1.32) rotate(8deg);filter:drop-shadow(0 0 30px #22c55e)}75%{transform:scale(1.18) rotate(-4deg)}}
+.profile-info.persona-max .big-emoji{animation:maxCine 2.2s infinite}.profile-info.persona-max:before{background:conic-gradient(transparent,#c084fcaa,transparent,#60a5faaa,transparent)}
+@keyframes maxCine{0%,100%{transform:rotate(0) scale(1)}25%{transform:rotate(-20deg) scale(1.18) translateY(-10px)}50%{transform:rotate(20deg) scale(1.3) translateY(-18px);filter:drop-shadow(0 0 30px #c084fc)}75%{transform:rotate(-8deg) scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.profile-info:before,.profile-info:after,.profile-info .hero:after{animation:none}.profile-info .big-emoji{animation:none!important}}
+
+
+/* ULTRA CINEMATIC ANIMATION UPGRADE */
+.card{transform-style:preserve-3d;transition:transform .35s cubic-bezier(.2,1.4,.3,1),filter .3s}
+.card:hover{transform:translateY(-12px) rotateX(3deg) rotateY(-3deg) scale(1.025);filter:drop-shadow(0 18px 22px #7c3aed55)}
+.card:before{content:"";position:absolute;z-index:5;inset:-3px;border-radius:28px;pointer-events:none;opacity:0;background:linear-gradient(115deg,transparent 15%,#fff9 48%,transparent 65%);transform:translateX(-130%);}
+.card:hover:before{opacity:1;animation:cardShine .8s ease}
+@keyframes cardShine{to{transform:translateX(130%)}}
+.card.lead .front{animation:championAura 2s ease-in-out infinite;border-width:5px}
+@keyframes championAura{0%,100%{box-shadow:0 8px 0 hsl(var(--h) 85% 45%/.55),0 0 10px hsl(var(--h) 100% 60%/.25)}50%{box-shadow:0 8px 0 hsl(var(--h) 85% 45%/.55),0 0 32px hsl(var(--h) 100% 65%/.9),0 0 60px hsl(var(--h) 100% 60%/.45)}}
+.card .emo{filter:drop-shadow(0 5px 8px #0003)}
+.card:hover .emo{animation:characterEntrance .75s cubic-bezier(.15,1.7,.3,1) both!important}
+@keyframes characterEntrance{0%{transform:translateY(35px) scale(.35) rotate(-35deg);filter:blur(8px)}55%{transform:translateY(-18px) scale(1.45) rotate(12deg);filter:blur(0) drop-shadow(0 0 22px #fff)}100%{transform:translateY(0) scale(1) rotate(0)}}
+.profile-info .ultimate{position:relative;overflow:hidden;animation:ultimateGlow 1.3s ease-in-out infinite alternate}
+.profile-info .ultimate:after{content:"";position:absolute;inset:-80% -20%;background:linear-gradient(100deg,transparent 35%,#fff9 50%,transparent 65%);transform:translateX(-100%) rotate(12deg);animation:ultimateSweep 2.1s ease-in-out infinite}
+@keyframes ultimateSweep{to{transform:translateX(100%) rotate(12deg)}}
+.profile-info .info-item{animation:tileIn .55s both;animation-delay:calc(var(--tile,0)*55ms)}
+.boss-arena{transition:filter .2s,box-shadow .3s}
+.boss-stage{isolation:isolate}
+.boss-stage:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 5px,#ffffff0b 6px 7px);mix-blend-mode:screen;animation:scanDrift 5s linear infinite}
+@keyframes scanDrift{to{background-position:0 90px}}
+.boss-villain{z-index:2;text-shadow:0 0 25px #c084fc,0 0 55px #7c3aed;transition:filter .2s}
+.boss-arena.phase2 .boss-villain{animation:bossDemon 1.15s ease-in-out infinite alternate}
+.boss-arena.phase3 .boss-villain{animation:bossFinal  .65s steps(2,end) infinite}
+@keyframes bossDemon{to{transform:translateY(-16px) scale(1.16) rotate(5deg);filter:hue-rotate(35deg) drop-shadow(0 0 45px #fb7185)}}
+@keyframes bossFinal{0%,100%{transform:translate(0) scale(1.08);filter:drop-shadow(0 0 22px #facc15)}25%{transform:translate(-7px,-12px) scale(1.22) rotate(-5deg);filter:drop-shadow(0 0 45px #fff)}75%{transform:translate(7px,4px) scale(1.12) rotate(5deg)}}
+.boss-arena.cinematic{animation:arenaImpact .55s ease}
+@keyframes arenaImpact{0%,100%{filter:none}18%{filter:brightness(2.5) contrast(1.4)}35%{filter:hue-rotate(80deg) brightness(1.5)}60%{filter:brightness(.65)}}
+.boss-stage .shockwave{position:absolute;z-index:3;width:25px;height:25px;border:8px solid #fff;border-radius:50%;pointer-events:none;animation:shockwave .75s ease-out forwards;box-shadow:0 0 25px #a5f3fc,inset 0 0 20px #fff}
+@keyframes shockwave{to{transform:scale(15);opacity:0;border-width:1px}}
+.boss-stage .boss-label{position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%) scale(.2) rotate(-12deg);font-size:clamp(26px,7vw,56px);font-weight:1000;white-space:nowrap;color:#fff;text-shadow:0 5px 0 #581c87,0 0 22px #fff;pointer-events:none;animation:impactLabel .85s cubic-bezier(.12,1.7,.3,1) forwards}
+@keyframes impactLabel{20%{opacity:1;transform:translate(-50%,-50%) scale(1.25) rotate(5deg)}70%{opacity:1;transform:translate(-50%,-70%) scale(1) rotate(-2deg)}100%{opacity:0;transform:translate(-50%,-110%) scale(.8)}}
+.boss-arena.ultimate-mode:after{content:"";position:fixed;inset:0;z-index:79;pointer-events:none;background:radial-gradient(circle,#fff9 0,#a855f755 35%,transparent 70%);animation:ultimateScreen .7s ease-out forwards}
+@keyframes ultimateScreen{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+.boss-arena.phase2 .boss-stage:after,.boss-arena.phase3 .boss-stage:after{height:26px;filter:blur(20px);box-shadow:0 0 35px #f97316}
+.boss-actions button{position:relative;overflow:hidden;transition:transform .18s,filter .2s}
+.boss-actions button:not(:disabled):hover{transform:translateY(-5px) scale(1.04);filter:brightness(1.3);box-shadow:0 0 25px #a78bfa}
+.boss-actions button:not(:disabled):active{transform:scale(.9) rotate(-3deg)}
+@media(prefers-reduced-motion:reduce){.card:hover,.card.lead .front,.boss-arena.phase2 .boss-villain,.boss-arena.phase3 .boss-villain{animation:none!important}}
+
+
+/* Boss 3D */
+.boss-stage{position:relative;min-height:340px}.boss-cv{position:absolute;inset:0;width:100%;height:100%;z-index:1;display:block}
+.boss-arena.has3d .boss-villain{display:none}.boss-arena.has3d .boss-stage:before,.boss-arena.has3d .boss-stage:after{display:none}
+.boss-fl,.boss-low{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0}.boss-low{background:radial-gradient(circle,#0000 45%,#dc2626cc)}
+.boss-dmg{position:absolute;z-index:6;pointer-events:none;font-weight:1000;text-shadow:0 0 12px #000,0 3px 0 #000;animation:dmgUp .9s ease-out forwards}
+@keyframes dmgUp{0%{transform:scale(.4);opacity:0}20%{transform:scale(1.3);opacity:1}100%{transform:translateY(-70px) scale(1);opacity:0}}
+.boss-bar{position:relative}.boss-bar i{position:absolute;left:0;top:0}#bossChip{background:#fff!important;transition:width .9s .3s!important;opacity:.85}
+.boss-keys{font-size:11px;opacity:.7;margin-top:6px}
+
+.boss-arena.full{position:fixed;inset:0;z-index:90;border-radius:0;border-width:0;display:flex;flex-direction:column;overflow-y:auto;padding:max(10px,env(safe-area-inset-top)) 14px 14px}
+.boss-arena.full:before{display:none}.boss-arena.full .boss-stage{flex:1 0 auto;min-height:max(42vh,260px);margin:6px 0}
+.boss-arena.full .boss-actions{max-width:900px;width:100%;margin:12px auto 0}.boss-arena.full .boss-log,.boss-arena.full .boss-stats{max-width:900px;width:100%;margin-left:auto;margin-right:auto}
+body.boss-open{overflow:hidden}
+</style>
+</head>
+<body>
+<div class="fl" id="fl" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+  <h1 id="ti">Wer ist der größte Sigma?</h1>
+  <p class="sub">Sigma, Rizz und Aura: Eine Stimme pro Person, jederzeit änderbar. Tippe auf „Infos" für das Profil.</p>
+  <div class="tick"><div id="tk">Willkommen! Stimme ab und werde Teil der Geschichte 🏆</div></div>
+  <div class="note" id="note" hidden></div>
+  <div class="bar2">
+    <button class="pill" id="bParty">🪩 Party-Modus</button>
+    <button class="pill" id="bSnd">🔊 Sound an</button>
+    <button class="pill" id="bMusic">🎵 Epische Musik starten</button>
+    <button class="pill" id="bShare">🔗 Link teilen</button>
+    <button class="pill" id="bRand">🎲 Zufalls-Sigma</button>
+    <button class="pill" id="bTrip">🌀 Trip-Modus</button>
+    <button class="pill" id="bRizz">😏 Rizzler-Check</button>
+    <button class="pill" id="bQuote">🐺 Sigma-Spruch</button>
+  </div>
+  <div class="rz" id="rz" hidden></div>
+  <h3>🏆 Das Siegerpodest</h3>
+  <div class="podium" id="pod"></div>
+  <h3>🥧 Stimmenverteilung</h3>
+  <div class="donutw"><div id="donut"></div><div class="leg" id="leg"></div></div>
+  <h3>🗳️ Abstimmen</h3>
+  <section class="grid" id="grid"></section>
+  <h3>🎮 Spielhalle</h3>
+  <p class="sub">Jedes Spiel gibt dir Aura für den Aura-Clicker.</p>
+  <div class="bar2" id="tabs"></div>
+  <div class="gmb" id="gm">Such dir ein Spiel aus 👆</div>
+  <h3>🏅 Sigma-Level & Missionen</h3>
+  <div class="gmb" id="meta"></div>
+  <h3>💪 Aura-Clicker</h3>
+  <div class="cc">
+    <div class="orbw"><button class="orb" id="orb" aria-label="Aura farmen">🗿</button><div class="big" id="at">0</div><div class="sub" id="aps">0 Aura pro Sekunde</div><div class="sub" id="acl"></div></div>
+    <div class="shop" id="shop"></div>
+  </div>
+  <div class="bar2"><button class="pill" id="aReset">Spielstand löschen</button></div>
+  <div class="status" id="st"></div>
+</main>
+<button class="fab" id="fab" aria-label="Admin">🔐</button>
+<div class="toast" id="toast" role="status"></div>
+<div class="mo" id="mo"><div class="box" id="box"></div></div>
+
+<script>window.onerror=function(m,s,l){var d=document.createElement("div");d.style.cssText="position:fixed;top:0;left:0;right:0;z-index:999;background:#b00020;color:#fff;padding:10px;font:14px monospace";d.textContent="Fehler: "+m+" (Zeile "+l+")";document.body.appendChild(d)};</script>
+<script>
+// ===== EINSTELLUNGEN =====
+window.SIGMA_CONFIG = {
+  // Für gemeinsame Stimmen auf GitHub Pages: Firebase-Daten eintragen (siehe README.md).
+  // Solange hier null steht, läuft die Seite im Demo-Modus (Stimmen nur im eigenen Browser).
+  firebase: null,
+  /* Beispiel:
+  firebase: { apiKey:"...", authDomain:"...", projectId:"...", appId:"..." }, */
+
+  // Admin-Login (nur ein Spaß-Schutz, siehe README)
+  adminName: "Cock",
+  adminCode: "Cock",
+
+  // Infos über die Leute: Platzhalter, hier ändern ODER später im Admin-Panel.
+  // Die Zahlen (0-100) sind Beispielwerte.
+  // Frei erfundene Meme-Personas – reine Spaßprofile, keine echten Behauptungen.
+  people: [
+    { name:"René", emoji:"🐺", nick:"Der Nachtwolf", origin:"Nicht angegeben", age:"Zeitloser Alpha", hobby:"Mondschein-Grind & Bossmusik", quote:"Der Wolf fragt nicht nach WLAN.", power:"Rudelruf: +100 Aura für alle", favoriteGame:"Minecraft", role:"Anführer des Rudels", strength:"Comeback-Mentalität", signatureMove:"Mitternachts-Heulen", bestMoment:"Hat einen Enderman angestarrt – der Enderman ist gegangen.", rival:"Der größte Konflikt ist mit Max", allies:"Florian – wenn es ernst wird", rivalryStory:"Der größte Konflikt ist mit Max: René glaubt, Max habe den Nullmond-Wald aus der Realität gelöscht. Mit Kolja liefert er sich ein ewiges Wettrennen – Wolf gegen Blitz. Timo respektiert er, weil dieser sich von seinem Gebrüll nicht beeindrucken lässt. Mit Florian bildet er eine Zweckallianz, wenn ein Boss zu stark wird.", Aura:96, Grind:82, Rizz:74, Ruhe:68 ,backstory:"Renés Legende begann im sogenannten Nullmond-Wald. Dort soll ein Server existiert haben, auf dem die Uhr niemals weiterlief. René blieb sieben Nächte, lernte jedes Geräusch des Waldes kennen und kehrte mit dem Titel Nachtwolf zurück. Seitdem sammelt er keine Siege – er sammelt Comebacks. Wenn das Team auseinanderzufallen droht, ruft er das Rudel und verwandelt selbst eine aussichtslose Runde in ein Finale. Doch sein Stolz ist sein Problem: Er will niemals zugeben, wenn ein Plan nicht funktioniert. In Staffel zwei entdeckt er, dass der Wald nicht verlassen, sondern nur von Max aus einer Simulation gelöscht wurde. Seitdem jagt René den Professor durch jede Arena.",chapter:"Kapitel I: Das Heulen des letzten Bioms",ultimate:"APOKALYPSE DES MONDLICHTS",weakness:"Ein quietschender Staubsauger und Vollmond-Verbindungsprobleme",entrance:"Der Himmel verdunkelt sich. Ein riesiger Mond erscheint, Wolfsgeheul hallt durch die Arena und René landet in einer Rauchwolke."},
+    { name:"Timo", emoji:"🗿", nick:"Der Beton-Mönch", origin:"Nicht angegeben", age:"Unmessbar", hobby:"Regungslosigkeit perfektionieren", quote:"…", power:"Steinernes Pokerface", favoriteGame:"Minecraft", role:"Endgegner der Emotionen", strength:"Unerschütterliche Ruhe", signatureMove:"NPC-Blick Stufe 9000", bestMoment:"Stand fünf Minuten AFK – alle dachten, es wäre ein Denkmal.", rival:"Timo und Michael sind Erzfeinde", allies:"Ubeyd – stilles Bündnis", rivalryStory:"Timo und Michael sind Erzfeinde: Feuer gegen Stein. René versucht ständig, ihn zu einem Wolfsruf zu bewegen – bisher ohne Erfolg. Max hält Timo für unberechenbar, weil seine Reaktionen in keinem Modell vorkommen. Mit Ubeyd verbindet ihn eine stille, überraschend starke Allianz.", Aura:91, Grind:78, Rizz:61, Ruhe:100 ,backstory:"Niemand weiß, woher Timo kam. Die ältesten Chroniken behaupten, er sei bereits als Statue in der Arena gestanden, bevor die Arena gebaut wurde. Er entdeckte die Kunst der absoluten Ruhe: Während andere ihre Energie verschwenden, wartet Timo auf den einen perfekten Moment. Sein steinernes Pokerface wurde zum Mythos, nachdem er einen kompletten Angriff von Michael überstand, ohne auch nur zu blinzeln. Doch hinter der Ruhe steckt ein taktischer Denker. Er beobachtet alle Rivalen und merkt sich jede Niederlage. Sein geheimes Ziel ist es, die sogenannte Ewige Pause auszulösen – einen Zustand, in dem die gesamte Welt für drei Sekunden stillsteht.",chapter:"Kapitel II: Die Prophezeiung des unbeweglichen Blocks",ultimate:"ABSOLUTE NULL-REAKTION",weakness:"Unerwartete Mathe-Klausuren und ein Wecker auf maximaler Lautstärke",entrance:"Der Boden verwandelt sich in Stein. Ein gewaltiger Gong ertönt. Timo erscheint ohne einen einzigen Schritt – die Kamera wackelt trotzdem."},
+    { name:"Ubeyd", emoji:"🕶️", nick:"Rizz-Regisseur", origin:"Türkei", age:"Geheime Akte", hobby:"Style-Punkte sammeln", quote:"War geplant.", power:"Rizz-Blitz: Gegner vergessen ihren Text", favoriteGame:"Rocket League", role:"Charisma-Abteilung", strength:"Auftritt mit Timing", signatureMove:"Sonnenbrillen-Slow-Mo", bestMoment:"Kam zu spät und sah trotzdem aus wie der Hauptcharakter.", rival:"Sein Hauptkonflikt ist mit Kolja", allies:"Timo – stiller Nichtangriffspakt", rivalryStory:"Sein Hauptkonflikt ist mit Kolja: Timing gegen Geschwindigkeit – Ubeyd will jeden Moment inszenieren, Kolja überspringt ihn einfach. Mit Timo hat er einen stillen Nichtangriffspakt. Michael versucht regelmäßig, seine dramatischen Auftritte mit Pyro zu überbieten. René hält Ubeyd für einen möglichen Verbündeten im Krieg gegen Max.", Aura:88, Grind:72, Rizz:100, Ruhe:76 ,backstory:"Ubeyds Geschichte beginnt in der Legende der sieben Turnier-Arenen. Mit der Türkei als Teil seiner Identität zog er in der Lore von Arena zu Arena und lernte, dass ein perfekter Auftritt manchmal mehr Wirkung hat als zehn laute Angriffe. Er wurde zum Rizz-Regisseur: Er kontrolliert das Timing, setzt die Sonnenbrille auf und lässt die Welt für einen Moment in Zeitlupe laufen. Sein größter Triumph war der sogenannte Goldene Anpfiff, bei dem er einen aussichtslosen Rückstand in einen legendären Auftritt verwandelte. Doch sein Stil hat eine Schwäche: Wenn jemand seinen Auftritt vorher durchschaut, verliert sein Plan den Überraschungseffekt. Deshalb arbeitet er inzwischen an einem geheimen Gegenmanöver.",chapter:"Kapitel III: Der Regisseur aus dem Endgame",ultimate:"TÜRKISCHER TURBO-RIZZ",weakness:"Akku bei 1 Prozent und beschlagene Sonnenbrillen",entrance:"Die Arena wird zum roten Teppich. Kamerablitze explodieren, die Zeit läuft in Zeitlupe und Ubeyd schreitet durch einen goldenen Lichtstrahl."},
+    { name:"Michael", emoji:"🔥", nick:"Der Küchen-Phönix", origin:"Nicht angegeben", age:"Level unbekannt", hobby:"Aus jeder Lage ein Event machen", quote:"Das eskaliert gleich.", power:"Feuerwerk-Finger", favoriteGame:"GTA", role:"Chaos-Manager", strength:"Energie auf Knopfdruck", signatureMove:"Dramatischer Feuer-Entrance", bestMoment:"Hat aus einem normalen Dienstag ein Staffelfinale gemacht.", rival:"Timo ist sein natürlicher Gegenpol", allies:"Ubeyd – Showdown der Inszenierung", rivalryStory:"Timo ist sein natürlicher Gegenpol: Feuer gegen Beton. Mit Florian streitet er darum, wer den längeren Grind durchzieht. Kolja ist sein Lieblingsziel für dramatische Verfolgungsjagden, trifft aber selten auf dieselbe Stelle zweimal. Ubeyd ist zugleich Rivale und Show-Partner – ihre Auftritte eskalieren regelmäßig.", Aura:86, Grind:89, Rizz:77, Ruhe:54 ,backstory:"Michael war einst der Hüter einer unscheinbaren Snackküche am Rand der Arena. Eines Abends fiel ein geheimnisvoller Funken in den Toaster. Das Gerät öffnete ein Portal in die Chaos-Dimension und Michael wurde vom Küchen-Phönix erwählt. Seitdem wird aus jeder Kleinigkeit ein weltbewegendes Ereignis: Ein verlorenes Match wird zur Tragödie, ein Sieg zum Kinofinale und eine spontane Idee zur Feuershow. Seine Flammen werden stärker, je dramatischer die Situation ist. Allerdings kann er seine Energie nicht immer kontrollieren. In der neuen Storyline sucht er die legendäre Frostpfanne, um seine Kräfte zu beherrschen – doch Timo bewacht den Schlüssel dazu.",chapter:"Kapitel IV: Der Snack, der die Welt entflammte",ultimate:"PHÖNIX-OVERDRIVE",weakness:"Kalte Pizza und ein viel zu ruhiger Tag",entrance:"Ein Feuerkreis schießt aus dem Boden. Flammen steigen wie Flügel empor und Michael landet mit einem Pyro-Knall."},
+    { name:"Kolja", emoji:"⚡", nick:"Blitzkolja", origin:"Nicht angegeben", age:"Lädt noch…", hobby:"Geschwindigkeit & spontane Ideen", quote:"Warte, ich hab da was.", power:"Teleport-Dash", favoriteGame:"Rocket League", role:"Speedrunner", strength:"Reaktionszeit", signatureMove:"Dreifach-Blitz-Dash", bestMoment:"War schon am Ziel, bevor die Erklärung fertig war.", rival:"Koljas größte Rivalität ist Ubeyd", allies:"René – ewiges Wettrennen", rivalryStory:"Koljas größte Rivalität ist Ubeyd: pure Geschwindigkeit gegen perfektes Timing. Mit René liefert er sich das legendäre Rennen um den Titel des schnellsten Hauptcharakters. Max will ihn mit Simulationen stoppen, während Michael ihn mit Feuerwerk verfolgt. Florian ist der Einzige, der Kolja manchmal zum kurzen Durchatmen bewegen kann.", Aura:93, Grind:84, Rizz:70, Ruhe:59 ,backstory:"Kolja bemerkte zuerst, dass die Ladezeiten der Welt nicht mit seiner Geschwindigkeit mithalten konnten. In einer verlassenen Update-Zone rannte er so schnell, dass er zwischen zwei Frames verschwand. Als Blitzkolja kehrte er zurück und konnte kurze Strecken teleportieren. Sein größter Feind ist nicht ein anderer Kämpfer, sondern jede Form von Warten. Er sammelt die Sekunden, die er anderen voraus ist, und baut daraus den Hyperraum-Dash. Doch seine Geschwindigkeit macht ihn manchmal unvorsichtig: Er kommt oft am Ziel an, bevor er weiß, warum er überhaupt losgerannt ist. Max versucht, seine Bewegungen vorauszuberechnen – bisher ohne vollständigen Erfolg.",chapter:"Kapitel V: Der Läufer außerhalb der Zeit",ultimate:"HYPERSPACE-DREIFACH-DASH",weakness:"Warteschlangen und Updates mit 99 Prozent",entrance:"Drei Blitze schlagen nacheinander ein. Kolja teleportiert zwischen ihnen hin und her, bis er plötzlich direkt vor dir steht."},
+    { name:"Florian", emoji:"🦾", nick:"Der Grind-Golem", origin:"Nicht angegeben", age:"Dauerhaft im Training", hobby:"Missionen abhaken", quote:"Noch eine Runde.", power:"Unendlicher Grind-Akku", favoriteGame:"Minecraft", role:"Team-Motor", strength:"Ausdauer", signatureMove:"100-Prozent-Fokus", bestMoment:"Hat aus 'kurz spielen' eine komplette Nachtschicht gemacht.", rival:"Michael ist sein Rivale im Ausdauer-Wettkampf", allies:"René – verlässliche Allianz", rivalryStory:"Michael ist sein Rivale im Ausdauer-Wettkampf: Grind gegen Chaos-Energie. René ist sein verlässlichster Verbündeter. Max möchte den Grind-Kern analysieren, doch Florian traut seinen Experimenten nicht. Mit Timo verbindet ihn gegenseitiger Respekt – beide können stundenlang weitermachen, ohne viel zu sagen.", Aura:82, Grind:100, Rizz:65, Ruhe:92 ,backstory:"Tief unter einer verlassenen Spawn-Basis fand Florian den Grind-Kern, eine Maschine, die sich von erledigten Aufgaben ernährt. Statt sie zu zerstören, baute er sie in seine Rüstung ein. Seitdem kann er länger trainieren als jede andere Figur. Doch der Kern hat einen Preis: Er verlangt immer eine weitere Runde. Florian wurde zum Grind-Golem und zum Motor des Teams. Als die anderen sich im Rivalitätskrieg verloren, hielt er die Basis zusammen und schmiedete einen Plan, der alle sieben Kräfte verbinden könnte. Sein größter innerer Konflikt: Er muss lernen, dass nicht jede Herausforderung durch noch mehr Grind gelöst wird.",chapter:"Kapitel VI: Der ewige Grind-Kern",ultimate:"UNENDLICHER FARM-MODUS",weakness:"Volle Festplatten und die Meldung Speicherplatz knapp",entrance:"Metallische Schritte erschüttern die Arena. Ein riesiger Energie-Akku lädt sich auf und Florian marschiert durch eine Wand aus Staub."},
+    { name:"Max", emoji:"🧠", nick:"Professor Big-Brain", origin:"Nicht angegeben", age:"Patch 2.0", hobby:"Strategien ausdenken", quote:"Ich hab's durchgerechnet.", power:"5D-Schach-Gedankenstrahl", favoriteGame:"Strategie- & Sandbox-Games", role:"Taktikzentrale", strength:"Pläne im Voraus", signatureMove:"Der 300-IQ-Schachzug", bestMoment:"Hat den Plan erklärt – und ihn dann spontan geändert.", rival:"René ist sein persönlicher Erzfeind, weil Max den Nullmond-Wald gelöscht hat. Kolja ist sein schwierigstes Forschungsprojekt", allies:"Niemand – er spielt lieber allein", rivalryStory:"René ist sein persönlicher Erzfeind, weil Max den Nullmond-Wald gelöscht hat. Kolja ist sein schwierigstes Forschungsprojekt: zu schnell für seine Vorhersagen. Timo macht ihm Angst, weil er sich nicht berechnen lässt. Mit Ubeyd schließt Max gelegentlich taktische Deals – solange beide glauben, den anderen auszutricksen.", Aura:90, Grind:86, Rizz:79, Ruhe:88 ,backstory:"Max fand in der Bibliothek der vergessenen Updates ein Buch mit dem Titel ‚Alle möglichen Spielzüge‘. Er las es rückwärts, entwickelte daraus die 5D-Strategie und begann, Ereignisse vorauszuplanen. Bald stellte er fest, dass sogar die Legenden der anderen Figuren Teil einer Simulation sein könnten. Er löschte den Nullmond-Wald, um einen Fehler im System zu beheben – und löste damit Renés ewige Feindschaft aus. Max behauptet, alles sei kalkuliert gewesen. In Wahrheit hat er zum ersten Mal keinen vollständigen Plan. Nun sucht er die sieben Fragmente des Ur-Patches, um die echte Geschichte der Arena zu entschlüsseln.",chapter:"Kapitel VII: Das letzte Update des Big Brain",ultimate:"GEHIRN-RESET AUF 3000 IQ",weakness:"Patchnotes ohne Zusammenfassung und Aufgaben ohne klare Regeln",entrance:"Schachfiguren schweben durch die Luft. Ein riesiges holografisches Gehirn öffnet sich und Max erscheint mitten in einer Explosion aus Formeln."}
+  ]
+};
+</script>
+<script>
+(function(){
+"use strict";
+var C=window.SIGMA_CONFIG,P=C.people,N=P.map(function(p){return p.name}),$=function(s){return document.querySelector(s)};
+var COL=["#ff3b6b","#ff9f1c","#ffe14d","#3ddc84","#2ec4ff","#6c5cff","#d94dff"],PARTY=["🎉","⭐","🔥","👑","🗿","🐺","✨","💎","🌀","👁️","🔮","😏"];
+var HUE=P.map(function(_,i){return Math.round(i*360/P.length+8)});
+var S={votes:{},adj:{},prof:{},set:{open:true,note:""}},store,ready=false;
+var vid=localStorage.getItem("sigma_vid");if(!vid){vid="v"+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem("sigma_vid",vid)}
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,mute=false,ac;
+
+/* ---------- Sound ---------- */
+function snd(f,d,t){if(mute)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();var o=ac.createOscillator(),g=ac.createGain();o.type=t||"square";o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(ac.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+(d||.12));o.stop(ac.currentTime+(d||.12))}catch(e){}}
+/* Epischer, eigens erzeugter Dauersoundtrack (startet nach bewusster Aktivierung) */
+var musicOn=false,musicTimer=null,musicStep=0,musicBus=null;
+var melody=[659,784,988,784,587,698,880,698,523,659,784,659,587,698,880,1047],bass=[131,131,165,165,110,110,147,147];
+function musicNote(freq,dur,when,type,vol){if(!ac||!musicBus)return;var o=ac.createOscillator(),g=ac.createGain(),f=ac.createBiquadFilter();o.type=type||"triangle";o.frequency.setValueAtTime(freq,when);f.type="lowpass";f.frequency.value=2600;g.gain.setValueAtTime(.0001,when);g.gain.exponentialRampToValueAtTime(vol||.025,when+.025);g.gain.exponentialRampToValueAtTime(.0001,when+dur);o.connect(f);f.connect(g);g.connect(musicBus);o.start(when);o.stop(when+dur+.03)}
+function musicBeat(){if(!musicOn||!ac)return;var now=ac.currentTime+.04,step=musicStep++%16;musicNote(melody[step],.32,now,"triangle",.025);if(step%2===0)musicNote(bass[(step/2|0)%8],.62,now,"sawtooth",.018);if(step%4===0){musicNote(melody[step]*2,.18,now,"sine",.012);musicNote(65,.12,now,"sine",.035)} }
+function setMusic(on){musicOn=on;var b=$("#bMusic");if(on){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();ac.resume();musicBus=musicBus||ac.createGain();musicBus.gain.value=.65;musicBus.connect(ac.destination);if(musicTimer)clearInterval(musicTimer);musicBeat();musicTimer=setInterval(musicBeat,190);b.textContent="🎵 Musik läuft – ausschalten";b.classList.add("music-live");toast("🎼 Der Sigma-Soundtrack läuft!")}catch(e){toast("Audio konnte nicht gestartet werden")}}else{if(musicTimer)clearInterval(musicTimer);musicTimer=null;if(musicBus)musicBus.gain.setTargetAtTime(.0001,ac.currentTime,.12);b.textContent="🎵 Epische Musik starten";b.classList.remove("music-live");toast("Musik pausiert")}}
+
+
+/* ---------- Konfetti & Feuerwerk ---------- */
+var cv=$("#fx"),cx=cv.getContext("2d"),PA=[],raf=0,W,H;
+function size(){var d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0)}
+addEventListener("resize",size);size();
+function burst(x,y,n,pw,emoji){if(reduce)return;if(document.hidden||PA.length>(window.SG_MAXP||380))return;n=Math.min(n,Math.max(6,Math.ceil(n*((window.SG_MAXP||380)-PA.length)/(window.SG_MAXP||380))),90);for(var i=0;i<n;i++){var a=Math.random()*6.28,s=(4+Math.random()*9)*pw;PA.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-6*pw,r:Math.random()*6.28,vr:(Math.random()-.5)*.4,w:6+Math.random()*7,h:4+Math.random()*6,c:COL[Math.random()*7|0],e:Math.random()<(emoji||.14)?PARTY[Math.random()*PARTY.length|0]:null,l:0})}if(!raf)raf=requestAnimationFrame(tick)}
+function tick(){cx.clearRect(0,0,W,H);PA=PA.filter(function(p){return p.y<H+40&&p.l<240});PA.forEach(function(p){p.vy+=.35;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l++;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);if(p.e){cx.font="22px serif";cx.fillText(p.e,-11,8)}else{cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h)}cx.restore()});if(PA.length)raf=requestAnimationFrame(tick);else{raf=0;cx.clearRect(0,0,W,H)}}
+function fireworks(n){if(window.SG_NOFW)return;n=Math.min(n,6);if(window.__fw>3)return;window.__fw=(window.__fw||0)+1;setTimeout(function(){window.__fw--},n*350+300);for(var i=0;i<n;i++)setTimeout(function(){burst(W*(.15+Math.random()*.7),H*(.15+Math.random()*.4),70,1.1,.2);snd(200+Math.random()*600,.2,"sawtooth")},i*350)}
+function rain(){if(reduce)return;if(PA.length>200)return;for(var i=0;i<40;i++)setTimeout(function(){PA.push({x:Math.random()*W,y:-20,vx:0,vy:2,r:0,vr:.05,w:0,h:0,c:"",e:PARTY[Math.random()*PARTY.length|0],l:0});if(!raf)raf=requestAnimationFrame(tick)},i*80)}
+function shake(){document.body.animate([{transform:"translate(0)"},{transform:"translate(-8px,4px)"},{transform:"translate(8px,-4px)"},{transform:"translate(-5px,-3px)"},{transform:"translate(0)"}],{duration:420})}
+
+/* Cursor-Funkeln */
+var lt=0;addEventListener("pointermove",function(e){if(reduce||Date.now()-lt<40)return;lt=Date.now();var s=document.createElement("span");s.textContent=PARTY[Math.random()*PARTY.length|0];s.style.cssText="position:fixed;z-index:85;pointer-events:none;left:"+e.clientX+"px;top:"+e.clientY+"px;font-size:16px";document.body.appendChild(s);s.animate([{transform:"translateY(0) scale(1)",opacity:1},{transform:"translateY(-40px) scale(.2)",opacity:0}],{duration:700}).onfinish=function(){s.remove()}});
+
+/* Druck-Animationen überall */
+document.addEventListener("pointerdown",function(e){
+  var b=e.target.closest&&e.target.closest("button,.card,h1");if(!b)return;
+  burst(e.clientX,e.clientY,16,.6);snd(300+Math.random()*500,.08);
+  if(b.tagName==="BUTTON"){var r=b.getBoundingClientRect(),s=document.createElement("span");s.className="rip";s.style.left=(e.clientX-r.left)+"px";s.style.top=(e.clientY-r.top)+"px";b.appendChild(s);setTimeout(function(){s.remove()},650);b.classList.remove("boing");void b.offsetWidth;b.classList.add("boing")}
+});
+var tt;function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},2800)}
+
+/* ---------- Hintergrund-Deko ---------- */
+(function(){var t=$("#ti"),x=t.textContent;t.textContent="";t.setAttribute("aria-label",x);for(var i=0;i<x.length;i++){var s=document.createElement("span");s.textContent=x[i]===" "?"\u00a0":x[i];s.setAttribute("aria-hidden","true");s.style.color="hsl("+(i*29%360)+" 90% 52%)";s.style.animationDelay=(-i*.12)+"s";t.appendChild(s)}
+var f=$("#fl");for(var j=0;j<16;j++){var e=document.createElement("span");e.textContent=PARTY[j%8];e.style.left=Math.random()*100+"%";e.style.fontSize=(22+Math.random()*28)+"px";e.style.animationDuration=(10+Math.random()*12)+"s";e.style.animationDelay=(-Math.random()*20)+"s";f.appendChild(e)}})();
+
+/* ---------- Datenlage ---------- */
+function prof(n){var b=P[N.indexOf(n)],o=S.prof[n]||{},r={};for(var k in b)r[k]=o[k]!==undefined&&o[k]!==""?o[k]:b[k];return r}
+function counts(){var c={},tot=0;N.forEach(function(n){c[n]=0});for(var k in S.votes){var v=S.votes[k].c;if(c.hasOwnProperty(v))c[v]++}N.forEach(function(n){c[n]=Math.max(0,c[n]+((S.adj[n]||{}).d||0));tot+=c[n]});return{c:c,t:tot}}
+
+/* ---------- Karten bauen ---------- */
+var grid=$("#grid"),cards=[],STAT=["Aura","Grind","Rizz","Ruhe"];
+N.forEach(function(n,i){
+  var c=document.createElement("article");c.className="card persona-"+ ["rene","timo","ubeyd","michael","kolja","florian","max"][i];c.style.setProperty("--h",HUE[i]);
+  c.innerHTML='<div class="crown">👑</div><div class="in"><div class="face front"><span class="emo"></span><h2></h2><div class="nick"></div><div class="bar"><i></i></div><div class="meta"><b class="cn">0</b> Stimmen <span class="pc"></span></div><div class="btns"><button class="vote">Voten!</button><button class="info">ℹ️ Infos</button></div></div><div class="face back"><h2 class="bn"></h2><div>🎂 Alter: <b class="a"></b></div><div>🎮 Hobby: <b class="h"></b></div><div>💬 Spruch: <b class="q"></b></div><div>🦸 Superkraft: <b class="p"></b></div><div>🎯 Lieblingsspiel: <b class="fg"></b></div><div>🏷️ Rolle: <b class="role"></b></div><div>💪 Stärke: <b class="strength"></b></div><div>⚡ Signature-Move: <b class="move"></b></div><div>😂 Legendärer Moment: <b class="moment"></b></div><div>⚔️ Rivalität: <b class="rival"></b></div><div class="sts"></div><button class="info" style="margin-top:auto">↩ Zurück</button></div></div>';
+  var sts=c.querySelector(".sts");STAT.forEach(function(k){sts.insertAdjacentHTML("beforeend",'<div class="st"><span>'+k+'</span><div class="bar"><i></i></div><b></b></div>')});
+  c.querySelector(".vote").addEventListener("click",function(e){vote(n,e)});
+  c.querySelectorAll(".info").forEach(function(b){b.addEventListener("click",function(){showProfile(n);snd(700,.1)})});
+  grid.appendChild(c);cards.push(c)});
+
+function showProfile(name){
+  var p=prof(name),idx=N.indexOf(name),h=HUE[idx],slug=["rene","timo","ubeyd","michael","kolja","florian","max"][idx],labels=[["🌍 Herkunft",p.origin||"Nicht angegeben"],["🎂 Alter",p.age],["🎮 Hobby",p.hobby],["💬 Spruch",p.quote],["🦸 Superkraft",p.power],["🎯 Lieblingsspiel",p.favoriteGame],["🏷️ Rolle",p.role],["💪 Stärke",p.strength],["⚡ Signature-Move",p.signatureMove],["😂 Legendärer Moment",p.bestMoment],["⚔️ Rivalität",p.rival]];
+  var html='<div class="profile-info persona-'+slug+'" style="--h:'+h+'"><div class="hero"><span class="big-emoji">'+p.emoji+'</span><div><h2>'+name+'</h2><div class="tagline">'+p.nick+'</div><div class="origin">🌍 '+(p.origin||"Nicht angegeben")+'</div><div style="font-size:12px;opacity:.75;margin-top:5px">SIGMA-LORE · FIKTIVE CHARAKTER-STORY</div></div></div>';
+  html+='<div class="chapter">'+(p.chapter||"Die Legende beginnt")+'</div><div class="story">'+(p.backstory||"Die Geschichte dieses Charakters wird noch geschrieben.")+'</div><div class="chapter">⚔️ FEHDE & RIVALITÄTEN</div><div class="story">'+(p.rivalryStory||"Noch keine Fehde bekannt.")+'</div><div class="info-grid"><div class="info-item"><b>🤝 Bündnis</b>'+(p.allies||"Kein festes Bündnis")+'</div><div class="info-item"><b>🎯 Hauptgegner</b>'+(p.rival||"Noch offen")+'</div></div><div class="ultimate">⚡ ULTIMATE: '+(p.ultimate||p.power)+'</div><div class="info-grid">';
+  labels.forEach(function(x,i){html+='<div class="info-item" style="--tile:'+i+'"><b>'+x[0]+'</b>'+x[1]+'</div>'});
+  html+='<div class="info-item weakness" style="--tile:11"><b>🧊 Schwäche</b>'+(p.weakness||"Noch unbekannt")+'</div><div class="info-item" style="--tile:12"><b>🎬 Spezial-Auftritt</b>'+(p.entrance||"Ein legendärer Auftritt")+'</div></div><div class="stats"><h3 style="text-align:left;margin:16px 0 8px">📊 Charakterwerte</h3>';
+  STAT.forEach(function(k){var v=Math.max(0,Math.min(100,+p[k]||0));html+='<div class="statline"><span>'+k+'</span><div class="track"><i style="width:'+v+'%"></i></div><b>'+v+'</b></div>'});
+  html+='</div><button class="pill close-profile" id="profileClose">Zurück zur Arena ✕</button></div>';box.innerHTML=html;openMo();
+  var panel=box.querySelector('.profile-info');if(!reduce){var r=panel.getBoundingClientRect();burst(r.left+r.width/2,r.top+100,115,1.7,.55);setTimeout(function(){burst(r.left+r.width/2,r.top+100,65,1.1,.35)},260)}
+  snd([180,260,420,330,520,700,610][idx],.32,"sawtooth");$('#profileClose').onclick=closeMo;
+}
+
+function render(){
+  var r=counts(),max=Math.max.apply(null,N.map(function(n){return r.c[n]})),mine=S.votes[vid]&&S.votes[vid].c;
+  cards.forEach(function(c,i){var n=N[i],p=prof(n),pc=r.t?Math.round(r.c[n]*100/r.t):0;
+    c.querySelector(".emo").textContent=p.emoji;c.querySelector("h2").textContent=n;c.querySelector(".nick").textContent="„"+p.nick+"“";
+    c.querySelector(".cn").textContent=r.c[n];c.querySelector(".pc").textContent=r.t?"("+pc+" %)":"";c.querySelector(".bar i").style.width=pc+"%";
+    c.classList.toggle("lead",max>0&&r.c[n]===max);c.classList.toggle("mine",mine===n);
+    var v=c.querySelector(".vote");v.firstChild.nodeValue=mine===n?"Dein Sigma ✓":"Voten!";v.disabled=!S.set.open;
+    c.querySelector(".bn").textContent=n+" "+p.emoji;c.querySelector(".a").textContent=p.age;c.querySelector(".h").textContent=p.hobby;c.querySelector(".q").textContent=p.quote;c.querySelector(".p").textContent=p.power;c.querySelector(".fg").textContent=p.favoriteGame||"Noch offen";c.querySelector(".role").textContent=p.role||"Noch offen";c.querySelector(".strength").textContent=p.strength||"Noch offen";c.querySelector(".move").textContent=p.signatureMove||"Noch offen";c.querySelector(".moment").textContent=p.bestMoment||"Noch offen";c.querySelector(".rival").textContent=p.rival||"Noch offen";
+    c.querySelectorAll(".st").forEach(function(s,j){var val=Math.max(0,Math.min(100,+p[STAT[j]]||0));s.querySelector("i").style.width=val+"%";s.querySelector("b").textContent=val})});
+  /* Podest */
+  var order=N.map(function(n,i){return i}).sort(function(a,b){return r.c[N[b]]-r.c[N[a]]}).slice(0,3),vis=[1,0,2],hs=[170,110,70],med=["🥇","🥈","🥉"],pod=$("#pod");pod.innerHTML="";
+  vis.forEach(function(rk){var i=order[rk];if(i===undefined)return;var d=document.createElement("div");d.className="pod";d.innerHTML='<span class="em"></span><div class="nm"></div><div class="blk"></div>';d.querySelector(".em").textContent=prof(N[i]).emoji;d.querySelector(".nm").textContent=N[i]+" ("+r.c[N[i]]+")";var b=d.querySelector(".blk");b.textContent=med[rk];b.style.height="0";b.style.background="hsl("+HUE[i]+" 85% 45%)";pod.appendChild(d);requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.height=hs[rk]+"px"})})});
+  /* Kuchen */
+  var acc=0,seg=[],leg=$("#leg");leg.innerHTML="";N.forEach(function(n,i){var p=r.t?r.c[n]*100/r.t:0;seg.push("hsl("+HUE[i]+" 85% 55%) "+acc+"% "+(acc+p)+"%");acc+=p;var d=document.createElement("div");d.innerHTML='<i style="background:hsl('+HUE[i]+' 85% 55%)"></i>';d.appendChild(document.createTextNode(n+": "+r.c[n]));leg.appendChild(d)});
+  $("#donut").style.background=r.t?"conic-gradient("+seg.join(",")+")":"var(--tr)";
+  /* Ticker & Banner */
+  var rec=Object.keys(S.votes).map(function(k){return S.votes[k]}).sort(function(a,b){return(b.t||0)-(a.t||0)}).slice(0,5).filter(function(v){return N.indexOf(v.c)>-1}).map(function(v){return "🗳️ Neue Stimme für "+v.c});
+  var lead=N.filter(function(n){return max>0&&r.c[n]===max});
+  $("#tk").textContent=(lead.length?"👑 Aktuell vorne: "+lead.join(" & ")+"   •   ":"")+(rec.join("   •   ")||"Noch keine Stimmen, sei der Erste!")+"   •   "+r.t+" Stimmen insgesamt";
+  var nt=$("#note");nt.hidden=!(S.set.note||!S.set.open);nt.textContent=(!S.set.open?"🔒 Abstimmung gesperrt. ":"")+(S.set.note||"");
+  if(admOpen)drawAdmin()}
+
+/* ---------- Abstimmen ---------- */
+function vote(n,e){
+  if(!S.set.open){toast("🔒 Die Abstimmung ist gerade gesperrt");return}
+  var rc=e.currentTarget.getBoundingClientRect();
+  burst(rc.left+rc.width/2,rc.top+rc.height/2,120,1.2,.2);burst(W*.1,H*.85,60,1.3);burst(W*.9,H*.85,60,1.3);rain();shake();
+  [523,659,784,1047].forEach(function(f,i){setTimeout(function(){snd(f,.15,"triangle")},i*90)});
+  toast("🎉 Deine Stimme für "+n+" zählt!");store.vote(vid,n)}
+
+/* ---------- Buttons ---------- */
+$("#bParty").onclick=function(){document.body.classList.toggle("party");fireworks(5);rain()};
+$("#bSnd").onclick=function(e){mute=!mute;e.currentTarget.textContent=mute?"🔇 Sound aus":"🔊 Sound an"};
+$("#bMusic").onclick=function(){setMusic(!musicOn)};
+$("#bShare").onclick=function(){var u=location.href.split("#")[0];(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(function(){toast("🔗 Link kopiert!")},function(){toast(u)})};
+$("#bRand").onclick=function(){var k=0,t=setInterval(function(){var i=Math.random()*N.length|0;cards.forEach(function(c){c.style.transform=""});cards[i].style.transform="scale(1.07) rotate(2deg)";snd(300+k*40,.06);if(++k>16){clearInterval(t);toast("🎲 Der Zufall sagt: "+N[i]+"!");burst(W/2,H/2,100,1.2,.3)}},110)};
+/* ---------- Trip, Rizz & Sigma ---------- */
+var QUOTES=["Ein Sigma braucht keine Likes, nur Aura.","Grind hört nie auf, auch nicht am Sonntag.","Der Wolf antwortet nicht auf Gruppenchats.","Ruhe ist die lauteste Aura.","Ein echter Rizzler sagt nur: Hey. Der Rest passiert.","Rizz ist, wenn der Raum dich begrüßt, bevor du ihn betrittst.","Alphas rufen laut. Sigmas sind einfach da.","Wer nie schläft, hat den Vorsprung."];
+var LINES=["Bist du WLAN? Ich spüre eine starke Verbindung.","Glaubst du an Liebe auf den ersten Blick oder soll ich nochmal vorbeilaufen?","Ich bin kein Koch, aber bei dir passt die Chemie.","Ist dein Name Google? Du hast alles, wonach ich gesucht habe."];
+function pick(a){return a[Math.random()*a.length|0]}
+function panel(em,title,sub,score,text){var z=$("#rz");z.hidden=false;z.innerHTML='<div class="em2"></div><div><b></b><div class="rs"></div><div class="bar"><i></i></div><span class="pl"></span></div>';z.querySelector(".em2").textContent=em;z.querySelector("b").textContent=title;z.querySelector(".rs").textContent=sub;z.querySelector(".pl").textContent=text;var b=z.querySelector(".bar");if(score==null)b.hidden=true;else requestAnimationFrame(function(){requestAnimationFrame(function(){b.querySelector("i").style.width=score+"%"})});z.scrollIntoView({behavior:"smooth",block:"center"})}
+var tripT;$("#bTrip").onclick=function(e){var on=document.body.classList.toggle("trip");e.currentTarget.textContent=on?"🌀 Trip beenden":"🌀 Trip-Modus";clearInterval(tripT);if(on){rain();toast("🌀 Alles dreht sich ...");tripT=setInterval(function(){snd(120+Math.random()*300,.5,"sine");if(Math.random()<.3)rain()},900)}};
+$("#bRizz").onclick=function(){var n=pick(N),p=prof(n),sc=Math.min(100,Math.round((+p.Rizz||50)*.7+Math.random()*30)),lv=sc>90?"Rizzler-Gott 👑":sc>75?"Gigachad-Rizz 😎":sc>55?"Solider Rizz 🙂":"Rizz-Lehrling 📚";panel(p.emoji,n+": "+sc+" % Rizz",lv,sc,"„"+pick(LINES)+"“");burst(W/2,H/2,90,1.1,.3);snd(700,.2,"triangle")};
+$("#bQuote").onclick=function(){panel("🐺","Sigma-Spruch","",null,pick(QUOTES));burst(W/2,H/2,50,.9);snd(220,.25,"sawtooth")};
+/* ---------- Aura-Clicker ---------- */
+/* Spielhalle */
+var TM=[];function ti(f,ms){var i=setInterval(f,ms);TM.push(i);return i}function td(f,ms){var i=setTimeout(f,ms);TM.push(i);return i}
+function stopAll(){TM.forEach(function(i){clearInterval(i);clearTimeout(i)});TM=[]}
+function best(k,v,low){var o=+localStorage.getItem(k)||0;if(v!=null&&(!o||(low?v<o:v>o))){localStorage.setItem(k,v);o=v}return o}
+function reward(n,msg){gain(n);gdraw();gsave();toast(msg+" +"+fmt(n)+" Aura")}
+function gReact(g){var st=0,t0,b=document.createElement("button"),inf=document.createElement("div");g.innerHTML="";b.className="pill";b.style.cssText="width:100%;padding:60px 10px;font-size:22px";b.textContent="Klicken zum Starten";inf.className="sub";inf.textContent=best("sg_react")?"Bestzeit: "+best("sg_react")+" ms":"Klick, sobald es grün wird";
+  b.onclick=function(){if(st===0){st=1;b.textContent="Warte auf Grün ...";b.style.background="#d90429";td(function(){st=2;t0=performance.now();b.style.background="#2ecc71";b.textContent="JETZT!"},1000+Math.random()*3000)}
+  else if(st===1){stopAll();st=0;b.style.background="";b.textContent="Zu früh! Nochmal klicken"}
+  else{var ms=Math.round(performance.now()-t0);st=0;b.style.background="";b.textContent=ms+" ms: "+(ms<200?"Sigma-Reflexe 🐺":ms<300?"Solide 🙂":"Zu langsam 🐌");if(ms<best("sg_react")||!best("sg_react")){best("sg_react",ms,1);inf.textContent="🏅 Neue Bestzeit: "+ms+" ms";burst(W/2,H/2,80,1)}reward(Math.max(10,320-ms),"⚡")}};g.appendChild(b);g.appendChild(inf)}
+function gMem(g){var em=P.map(function(p){return p.emoji}).concat(["🏆"]),dk=em.concat(em).sort(function(){return Math.random()-.5}),op=[],lk=false,mv=0,fd=0;g.innerHTML='<div class="sub"></div><div class="mg"></div>';var inf=g.firstChild,gr=g.lastChild;inf.textContent="Züge: 0 · Bestwert: "+(best("sg_mem")||"-");
+  dk.forEach(function(e){var b=document.createElement("button");b.className="mc";b.textContent="❓";b.onclick=function(){if(lk||b.dataset.o||b===op[0])return;b.textContent=e;b.dataset.e=e;op.push(b);snd(500,.07);if(op.length===2){mv++;inf.textContent="Züge: "+mv;if(op[0].dataset.e===op[1].dataset.e){op.forEach(function(x){x.dataset.o=1;x.style.background="#3ddc84"});op=[];if(++fd===8){best("sg_mem",mv,1);fireworks(3);reward(Math.max(30,300-mv*10),"🧠 "+mv+" Züge!")}}else{lk=true;td(function(){op.forEach(function(x){x.textContent="❓"});op=[];lk=false},700)}}};gr.appendChild(b)})}
+function gDuel(g){var o=N.map(function(n,i){return'<option value="'+i+'">'+n+'</option>'}).join("");g.innerHTML='<select id="d1">'+o+'</select> ⚔️ <select id="d2">'+o+'</select><br><button class="pill" id="dg">Duell starten!</button><div class="big" id="dr" style="font-size:22px"></div>';g.querySelector("#d2").value=1;
+  g.querySelector("#dg").onclick=function(){var a=+g.querySelector("#d1").value,b=+g.querySelector("#d2").value,r=g.querySelector("#dr");if(a===b){r.textContent="Such zwei verschiedene aus 😅";return}var k=3;r.textContent="3 ...";ti(function(){k--;if(k>0){r.textContent=k+" ...";snd(300,.1);return}stopAll();var pa=prof(N[a]),pb=prof(N[b]),sa=(+pa.Rizz||0)+(+pa.Aura||0)*.5+Math.random()*80,sb=(+pb.Rizz||0)+(+pb.Aura||0)*.5+Math.random()*80,w=sa>=sb?pa:pb,wn=sa>=sb?N[a]:N[b];r.textContent=w.emoji+" "+wn+" gewinnt das Rizz-Duell! ("+Math.round(Math.max(sa,sb))+" : "+Math.round(Math.min(sa,sb))+")";burst(W/2,H/2,100,1.1,.3);snd(800,.3,"triangle");reward(15,"🥊")},800)}}
+function gSlot(g){var sy=P.map(function(p){return p.emoji}).concat(["💎","7️⃣"]);g.innerHTML='<div class="sub" id="sa"></div><div class="big" id="sr">🎰 🎰 🎰</div><button class="pill" id="sg">Drehen (10 Aura)</button><div class="sub">3 gleiche = 200 Aura · 2 gleiche = 25 Aura</div>';var sa=g.querySelector("#sa"),sr=g.querySelector("#sr"),bt=g.querySelector("#sg");sa.textContent="Dein Guthaben: "+fmt(G.a)+" Aura";
+  bt.onclick=function(){if(G.a<10){toast("Zu wenig Aura! Farm im Clicker oder spiel andere Spiele");return}G.a-=10;gdraw();bt.disabled=true;var n=0,r=[0,0,0].map(function(){return pick(sy)});ti(function(){n++;sr.textContent=[0,0,0].map(function(){return pick(sy)}).join(" ");snd(200+n*20,.04);if(n>12){stopAll();sr.textContent=r.join(" ");bt.disabled=false;var w=r[0]===r[1]&&r[1]===r[2]?200:(r[0]===r[1]||r[1]===r[2]||r[0]===r[2])?25:0;if(w){gain(w);fireworks(w>100?5:1);toast("🎰 Gewonnen: +"+w+" Aura")}else toast("🎰 Leider nichts");gdraw();gsave();sa.textContent="Dein Guthaben: "+fmt(G.a)+" Aura"}},80)}}
+function gQuiz(g){var Q=[["Samstagabend, was machst du?",["Trainieren bis die Hanteln weinen","Couch, Ruhe, nix tun","Party, alle quatschen mit dir","Du kommst rein und alle werden still"]],["Welche Superkraft willst du?",["Nie müde werden","Immer cool bleiben","Jeden überzeugen","Unsichtbar berühmt sein"]],["Gruppenchat: 100 neue Nachrichten.",["Ich plane schon den Tag","Ignoriert, ich bleibe ruhig","Perfekter Spruch, alle lachen","Ein Emoji reicht"]],["Wie startest du den Tag?",["5 Uhr, Kaltdusche","Ausschlafen und entspannen","Spiegel-Check, Lächeln","Ich bin einfach da"]]],ST=["Grind","Ruhe","Rizz","Aura"],sc=[0,0,0,0],q=0;
+  function show(){if(q>=Q.length){var bi=0,bd=1e9;N.forEach(function(n,i){var p=prof(n),d=0;ST.forEach(function(k,j){d+=Math.abs((+p[k]||0)-(30+sc[j]*17))});if(d<bd){bd=d;bi=i}});var p=prof(N[bi]);g.innerHTML='<div class="big"></div><div class="sub">Dein Sigma-Typ passt am besten zu ...</div>';g.firstChild.textContent=p.emoji+" "+N[bi];fireworks(3);reward(40,"🧪");return}
+    g.innerHTML='<div class="sub">Frage '+(q+1)+" von "+Q.length+'</div><b></b>';g.querySelector("b").textContent=Q[q][0];Q[q][1].forEach(function(t,j){var b=document.createElement("button");b.className="pill ans";b.textContent=t;b.onclick=function(){sc[j]++;q++;show()};g.appendChild(b)})}show()}
+function gWhack(g){g.innerHTML='<div class="sub"></div><div class="mg3"></div><button class="pill">Start (20 s)</button>';var inf=g.firstChild,gr=g.children[1],hs=[],sc=0,tl=0;inf.textContent="Bestwert: "+(best("sg_whack")||"-")+" · Tippe die Gesichter!";
+  for(var i=0;i<9;i++){var b=document.createElement("button");b.className="mc";b.onclick=function(){if(this.dataset.up){this.dataset.up="";this.textContent="";sc++;snd(700,.05);inf.textContent="Zeit: "+tl+" s · Treffer: "+sc}};gr.appendChild(b);hs.push(b)}
+  g.lastChild.onclick=function(){stopAll();sc=0;tl=20;ti(function(){tl--;inf.textContent="Zeit: "+tl+" s · Treffer: "+sc;if(tl<=0){stopAll();hs.forEach(function(x){x.textContent="";x.dataset.up=""});best("sg_whack",sc);burst(W/2,H/2,80,1);reward(sc*5,"🔨 "+sc+" Treffer!")}},1000);ti(function(){var h=pick(hs);h.textContent=pick(P).emoji;h.dataset.up=1;td(function(){h.textContent="";h.dataset.up=""},750)},650)}}
+
+function gRace(g){
+  var horses=[{n:"Blitz",e:"🐎"},{n:"Shadow",e:"🏇"},{n:"Donner",e:"🐴"},{n:"Phantom",e:"🦄"}],chosen=0,running=false;
+  g.innerHTML='<div class="race-meta"><span>🏟️ SIGMA DERBY</span><span id="raceWallet">Deine Aura: '+fmt(G.a)+'</span></div><p class="sub" style="color:#28552b">Wähle dein Pferd und deinen Einsatz. Wer zuerst im Ziel ist, gewinnt!</p><div class="race-bet"><label for="raceHorse">Dein Pferd:</label><select id="raceHorse">'+horses.map(function(h,i){return '<option value="'+i+'">'+h.e+' '+h.n+'</option>'}).join('')+'</select><label for="raceStake">Einsatz:</label><input id="raceStake" type="number" min="1" step="1" value="25" max="'+Math.max(1,Math.floor(G.a))+'"></div><div class="race-track">'+horses.map(function(h,i){return '<div class="race-lane"><span class="race-horse" id="rh'+i+'">'+h.e+'</span></div>'}).join('')+'<div class="race-finish"></div></div><div class="race-result" id="raceResult">🏁 Bereit zum Rennen?</div><button class="pill race-btn" id="raceStart">🏇 Rennen starten!</button><div class="sub" style="color:#28552b">Bei einem Sieg bekommst du deinen Einsatz zurück plus den gleichen Betrag als Gewinn. Bei Niederlage ist der Einsatz weg.</div>';
+  var sel=g.querySelector('#raceHorse'),stake=g.querySelector('#raceStake'),start=g.querySelector('#raceStart'),result=g.querySelector('#raceResult');
+  start.onclick=function(){if(running)return;var bet=Math.floor(+stake.value),pickHorse=+sel.value;if(!Number.isFinite(bet)||bet<1||bet>G.a){toast('Bitte einen gültigen Einsatz eingeben!');return}G.a-=bet;gdraw();gsave();running=true;start.disabled=true;sel.disabled=true;stake.disabled=true;g.querySelector('#raceWallet').textContent='Deine Aura: '+fmt(G.a);result.textContent='🚩 Und los geht’s!';var pos=[0,0,0,0],finish=false;var iv=setInterval(function(){for(var i=0;i<4;i++){pos[i]=Math.min(100,pos[i]+(1.2+Math.random()*3.4)*(Math.random()<.13?1.8:1));g.querySelector('#rh'+i).style.left=pos[i]+'%'}var winner=pos.findIndex(function(x){return x>=94});if(winner>=0&&!finish){finish=true;clearInterval(iv);running=false;start.disabled=false;sel.disabled=false;stake.disabled=false;var won=winner===pickHorse;if(won){G.racesWon=(G.racesWon||0)+1;var rd=new Date().toDateString();localStorage.setItem("sg_races_day_"+rd,(+localStorage.getItem("sg_races_day_"+rd)||0)+1);gain(bet*2);fireworks(7);rain();result.textContent='🏆 '+horses[winner].e+' '+horses[winner].n+' gewinnt! +'+fmt(Math.floor(bet*mult()))+' Aura Gewinn!';snd(880,.5,'triangle')}else{result.textContent='🐎 '+horses[winner].n+' gewinnt! Dein Pferd war knapp dahinter.';burst(W/2,H/2,35,.6);snd(160,.35,'sawtooth')}g.querySelector('#raceWallet').textContent='Deine Aura: '+fmt(G.a);gdraw();gsave() }},130)};
+}
+
+function gCoin(g){g.innerHTML='<div class="big">🪙</div><p>Wähle Kopf oder Zahl. Richtiger Tipp bringt 20 Aura – ganz ohne Einsatz.</p><button class="pill" id="heads">Kopf</button> <button class="pill" id="tails">Zahl</button><div class="race-result" id="coinResult"></div>';["heads","tails"].forEach(function(id){g.querySelector("#"+id).onclick=function(){var r=Math.random()<.5?"Kopf":"Zahl",ok=(id==="heads"?"Kopf":"Zahl")===r;g.querySelector("#coinResult").textContent=(r==="Kopf"?"🟡":"⚫")+" "+r+"! "+(ok?"Richtig! +20 Aura":"Diesmal daneben.");if(ok)reward(20,"🪙 Treffer!");else{gdraw();gsave()}}})}
+function gGuess(g){var target=1+Math.floor(Math.random()*5),tries=3;g.innerHTML='<div class="big">🔮</div><p>Errate die geheime Zahl zwischen 1 und 5. Du hast 3 Versuche.</p><div><input id="guess" type="number" min="1" max="5" value="3" style="padding:12px;width:90px;border-radius:10px;border:2px solid #aaa;font:700 20px system-ui"><button class="pill" id="guessGo">Prüfen</button></div><div class="race-result" id="guessResult"></div>';g.querySelector("#guessGo").onclick=function(){var v=+g.querySelector("#guess").value,r=g.querySelector("#guessResult");if(v<1||v>5){r.textContent="Bitte 1 bis 5 eingeben.";return}tries--;if(v===target){r.textContent="🎯 Volltreffer! +35 Aura";reward(35,"🔮 Richtige Zahl!");g.querySelector("#guessGo").disabled=true}else if(!tries){r.textContent="Die Zahl war "+target+". Neue Runde starten!";g.querySelector("#guessGo").disabled=true}else r.textContent=(v<target?"Höher!":"Niedriger!")+" Noch "+tries+" Versuche."}}
+function loadThree(cb){if(window.THREE)return cb(true);var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';s.onload=function(){cb(!!window.THREE)};s.onerror=function(){cb(false)};document.head.appendChild(s)}
+function boss3d(stage){
+var T=THREE,K=reduce?0:1,cv=document.createElement('canvas');cv.className='boss-cv';stage.insertBefore(cv,stage.firstChild);
+var R=new T.WebGLRenderer({canvas:cv,antialias:true});R.setPixelRatio(Math.min(devicePixelRatio||1,window.SG_PR||2));R.toneMapping=T.ACESFilmicToneMapping;
+var sc=new T.Scene();sc.background=new T.Color(0x06040f);sc.fog=new T.FogExp2(0x0a0618,.028);
+var cam=new T.PerspectiveCamera(52,1,.1,200);
+function rs(){var w=stage.clientWidth||300,h=stage.clientHeight||300;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}rs();
+if(window.ResizeObserver)new ResizeObserver(rs).observe(stage);
+var acc=new T.Color(0xa855f7),tgt=new T.Color(0xa855f7),mats=[],AD=T.AdditiveBlending;
+function em(o){o=o||{};o.fog=false;var m=new T.MeshBasicMaterial(o);if(!o.color)mats.push(m);return m}
+function tex(f){var c=document.createElement('canvas');c.width=c.height=512;var x=c.getContext('2d');f(x);return new T.CanvasTexture(c)}
+var glowT=tex(function(x){var g=x.createRadialGradient(256,256,0,256,256,256);g.addColorStop(0,'#fff');g.addColorStop(.25,'#fffa');g.addColorStop(1,'#0000');x.fillStyle=g;x.fillRect(0,0,512,512)});
+var runeT=tex(function(x){x.translate(256,256);x.strokeStyle='#fff';[250,236,170,120].forEach(function(r,i){x.lineWidth=i%2?2:5;x.beginPath();x.arc(0,0,r,0,7);x.stroke()});
+for(var i=0;i<72;i++){x.save();x.rotate(i*Math.PI/36);x.lineWidth=i%6?2:5;x.beginPath();x.moveTo(0,-236);x.lineTo(0,-(i%6?222:204));x.stroke();x.restore()}
+[5,7].forEach(function(n,k){x.lineWidth=3;x.beginPath();for(var i=0;i<=n;i++){var a=i*2*Math.PI*(k?3:2)/n-1.57;x[i?'lineTo':'moveTo'](Math.cos(a)*170,Math.sin(a)*170)}x.stroke()})});
+function glow(s,o){var sm=new T.SpriteMaterial({map:glowT,blending:AD,transparent:true,depthWrite:false,opacity:o||1,fog:false});mats.push(sm);var m=new T.Sprite(sm);m.scale.set(s,s,1);return m}
+sc.add(new T.HemisphereLight(0x8b6fe0,0x140a24,.7));
+var key=new T.DirectionalLight(0xffffff,.8);key.position.set(4,12,10);sc.add(key);
+var core=new T.PointLight(0xa855f7,2,30);sc.add(core);var rim=new T.PointLight(0x22d3ee,1.2,40);rim.position.set(-10,6,-6);sc.add(rim);
+var fl=new T.Mesh(new T.CircleGeometry(18,64),new T.MeshStandardMaterial({color:0x14102a,metalness:.85,roughness:.35}));fl.rotation.x=-1.571;sc.add(fl);
+var rune=new T.Mesh(new T.PlaneGeometry(24,24),em({map:runeT,blending:AD,transparent:true,depthWrite:false,opacity:.9}));rune.rotation.x=-1.571;rune.position.y=.03;sc.add(rune);
+var portal=new T.Mesh(new T.PlaneGeometry(34,34),em({map:runeT,blending:AD,transparent:true,depthWrite:false,opacity:.55}));portal.position.set(0,9,-15);sc.add(portal);
+var pil=[],rocks=[],i,a;
+for(i=0;i<8;i++){a=i/8*6.283;var p=new T.Group();p.position.set(Math.cos(a)*12.5,0,Math.sin(a)*12.5-3);var c=new T.Mesh(new T.BoxGeometry(1.1,7+i%3*2,1.1),new T.MeshStandardMaterial({color:0x1a1330,metalness:.8,roughness:.4,flatShading:true}));c.position.y=3.5;var s=new T.Mesh(new T.BoxGeometry(.18,6,1.15),em());s.position.y=3.5;p.add(c,s);sc.add(p);pil.push(s)}
+for(i=0;i<14;i++){var r=new T.Mesh(new T.DodecahedronGeometry(.4+Math.random()*.7,0),new T.MeshStandardMaterial({color:0x2a1f48,flatShading:true,roughness:.6}));r.userData={a:Math.random()*6.28,d:7+Math.random()*9,h:1+Math.random()*9,s:.1+Math.random()*.3};sc.add(r);rocks.push(r)}
+var ep=new Float32Array(900),eg=new T.BufferGeometry();for(i=0;i<300;i++){ep[i*3]=(Math.random()-.5)*34;ep[i*3+1]=Math.random()*14;ep[i*3+2]=(Math.random()-.5)*34}
+eg.setAttribute('position',new T.BufferAttribute(ep,3));var emb=new T.Points(eg,(function(){var pm=new T.PointsMaterial({size:.16,map:glowT,blending:AD,transparent:true,depthWrite:false,fog:false});mats.push(pm);return pm})());sc.add(emb);
+var N=700,pp=new Float32Array(N*3),pc=new Float32Array(N*3),pv=[],pl=new Float32Array(N),pg=new T.BufferGeometry();for(i=0;i<N;i++){pv.push(new T.Vector3());pp[i*3+1]=-99}
+pg.setAttribute('position',new T.BufferAttribute(pp,3));pg.setAttribute('color',new T.BufferAttribute(pc,3));var parts=new T.Points(pg,new T.PointsMaterial({size:.45,map:glowT,vertexColors:true,blending:AD,transparent:true,depthWrite:false}));parts.frustumCulled=false;sc.add(parts);var pi=0;
+function emit(x,y,z,n,sp,col,up,g){col=col||acc;for(var k=0;k<n;k++){var j=pi++%N;pp[j*3]=x;pp[j*3+1]=y;pp[j*3+2]=z;var v=pv[j];v.set(Math.random()-.5,Math.random()-.5+(up||0),Math.random()-.5).normalize().multiplyScalar(sp*(.3+Math.random()));v.g=g||0;pl[j]=.6+Math.random()*.9;pc[j*3]=col.r;pc[j*3+1]=col.g;pc[j*3+2]=col.b}}
+var rings=[],rg=new T.TorusGeometry(1,.05,6,64);
+function wave(x,y,z,sz,col,flat,sp){var m=new T.Mesh(rg,em({color:(col||acc).clone(),transparent:true,blending:AD,depthWrite:false}));m.position.set(x,y,z);if(flat)m.rotation.x=1.571;else m.lookAt(cam.position);m.userData={t:0,sz:sz||9,sp:sp||1.3};sc.add(m);rings.push(m)}
+var B,fists,rg3,wings,eyes,tor,head,bm,L,fl2,tails,spk;var xs=new T.Vector3();
+function link(m,p,q){xs.subVectors(q,p);var l=xs.length();m.position.copy(p).addScaledVector(xs,.5);m.scale.set(1,l,1);m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),xs.normalize())}
+function mk(){if(B)sc.remove(B);B=new T.Group();sc.add(B);bm=[];function bd(g,c){var m=new T.MeshStandardMaterial({color:c||0x1b1033,metalness:.9,roughness:.3,flatShading:true,emissive:0});bm.push(m);return new T.Mesh(g,m)}
+tor=bd(new T.CylinderGeometry(1.2,.6,2.6,6));tor.position.y=3.6;tails=bd(new T.ConeGeometry(.9,2.6,6));tails.rotation.x=3.14;tails.position.y=1.3;
+head=bd(new T.DodecahedronGeometry(.6,0));head.position.set(0,5.4,.1);head.scale.set(1,1.1,1);
+eyes=[-1,1].map(function(s){var e=new T.Mesh(new T.BoxGeometry(.38,.08,.1),em({color:0xffffff}));e.position.set(s*.25,5.45,.62);e.rotation.z=-s*.3;B.add(e);return e});
+[-1,1].forEach(function(s){var h=bd(new T.ConeGeometry(.2,1.5,6));h.position.set(s*.5,6.1,0);h.rotation.z=-s*.55;B.add(h);var sh=bd(new T.DodecahedronGeometry(.75,0),0x241545);sh.position.set(s*1.6,4.6,0);sh.scale.set(1.2,.8,1);B.add(sh);var sp=bd(new T.ConeGeometry(.22,1,5));sp.position.set(s*1.7,5.3,0);B.add(sp)});
+spk=[];for(i=0;i<5;i++){var cs=bd(new T.ConeGeometry(.12,.9+(i%2)*.4,4));cs.position.set((i-2)*.22,6.3,-.2);cs.visible=false;B.add(cs);spk.push(cs)}
+var cr=new T.Mesh(new T.IcosahedronGeometry(.55,1),em({color:0xffffff}));cr.position.set(0,3.7,.75);B.add(cr);B.core=cr;var g1=glow(3.6);g1.position.copy(cr.position);B.add(g1);B.g1=g1;
+var cage=new T.Mesh(new T.IcosahedronGeometry(.85,1),em({wireframe:true}));cage.position.copy(cr.position);B.add(cage);B.cage=cage;
+B.add(tor,tails,head);fists=[-1,1].map(function(s){var f=bd(new T.DodecahedronGeometry(.75,0),0x2a1850);var k=new T.Mesh(new T.OctahedronGeometry(.3),em());f.add(k);B.add(f);var u=new T.Mesh(new T.CylinderGeometry(.22,.18,1,6),bm[0]);var w=new T.Mesh(new T.CylinderGeometry(.18,.28,1,6),bm[0]);B.add(u,w);f.userData={s:s,u:u,w:w};return f});
+rg3=[0,1,2].map(function(k){var r=new T.Mesh(new T.TorusGeometry(2.6+k*.55,.045,8,80),em());r.position.y=3.6;r.rotation.set(1.2+k,k*1.3,0);B.add(r);return r});
+wings=[-1,1].map(function(s){var w=new T.Group();w.position.set(s*.8,4.6,-.5);for(i=0;i<6;i++){var b=bd(new T.ConeGeometry(.16,3.2+i*.5,4),0x2a1850);b.position.set(s*(.5+i*.2),.4+i*.1,0);b.geometry.translate(0,1.6,0);b.rotation.z=-s*(.7+i*.2);w.add(b)}w.visible=false;B.add(w);return w});
+B.userData={y:-9,sc:1}}
+var S={},ts=1,t=0,shk=0,zm=0,fv=0,flash=0,kb=0,warn=0,slam=0,dash=0,rise=1,lvl=1,dying=0,lost=0,aq=[],shield=null,wt=0,blades=[],dead=false;
+function after(s,f){aq.push([t+s,f])}
+var ov=document.createElement('div');ov.className='boss-fl';stage.appendChild(ov);
+function fx(c,o,ms){ov.style.background=c;ov.animate([{opacity:o},{opacity:0}],{duration:ms||400})}
+var lv=document.createElement('div');lv.className='boss-low';stage.appendChild(lv);
+function num(txt,c,big){var d=document.createElement('b');d.className='boss-dmg';d.textContent=txt;d.style.color=c||'#fff';d.style.fontSize=big?'40px':'26px';d.style.left=(35+Math.random()*30)+'%';d.style.top=(25+Math.random()*15)+'%';stage.appendChild(d);setTimeout(function(){d.remove()},900)}
+var cols={y:new T.Color(0xfde047),w:new T.Color(0xffffff),g:new T.Color(0x34d399),r:new T.Color(0xff3344),c:new T.Color(0x22d3ee)};
+function pHit(d){shk=Math.max(shk,.7+d/40);fx('radial-gradient(circle,#0000 30%,#ef4444)',.95,500);emit(0,2,9,30,4,cols.r,.5)}
+S.reset=function(){mk();rise=0;dying=lost=0;ts=1;lvl=1;S.phase(1,1);aq=[];blades.forEach(function(b){sc.remove(b)});blades=[];if(shield){sc.remove(shield);shield=null}lv.style.opacity=0;B.visible=true};
+S.intro=function(){rise=0;shk=1.2;wave(0,.1,0,14,acc,1);emit(0,.2,0,80,6,acc,1,-4);fx('#fff',.6,700)};
+S.phase=function(n,quiet){lvl=n;tgt.set([0xa855f7,0xff5a2a,0xffd23f][n-1]);B.userData.sc=[1,1.12,1.28][n-1];wings.forEach(function(w){w.visible=n>2});spk.forEach(function(s){s.visible=n>1});
+if(quiet)return;shk=1.6;ts=.25;zm=-4;fv=14;flash=1;wave(0,1,0,16,acc,1);wave(0,3.6,0,10,cols.w,0,2);emit(0,3.6,0,150,12,acc,.2);fx(n>2?'#ffd23f':'#ff5a2a',.8,900)};
+S.hit=function(d){flash=1;kb=.7;shk=Math.max(shk,.35);ts=.5;var y=3.5+Math.random()*1.5,x=(Math.random()-.5)*2;emit(x,y,1,26,9,cols.y,.3);emit(x,y,1,10,5,cols.w);
+var s=new T.Mesh(new T.PlaneGeometry(5,.12),em({color:0xffffff,transparent:true,blending:AD,depthWrite:false}));s.position.set(x,y,1.4);s.rotation.z=Math.random()*3.14;s.userData={t:0};sc.add(s);blades.push(s);num('-'+d,'#fde047')};
+S.special=function(d){var o=new T.Group();o.position.set(0,2.6,8);o.add(glow(1.2,1));sc.add(o);shield&&0;emit(0,2.6,8,50,-3,cols.c);zm=2;
+after(.15,function(){emit(0,2.6,8,60,4,cols.c)});
+after(.55,function(){sc.remove(o);var b=new T.Mesh(new T.CylinderGeometry(.9,.9,1,16,1,true),em({color:0xffffff,transparent:true,blending:AD,depthWrite:false,side:2}));b.rotation.x=1.571;b.position.set(0,3.6,4);b.scale.set(1,8,1);b.userData={t:0,beam:1};sc.add(b);blades.push(b);
+ts=.2;flash=1.5;shk=2;fv=-18;zm=-5;fx('#fff',.95,600);wave(0,3.6,0,18,cols.c,0,2.2);wave(0,.1,0,18,cols.w,1);emit(0,3.6,0,260,16,cols.w,.2);emit(0,3.6,0,160,10,cols.c);num('-'+d+' SIGMA','#22d3ee',1)})};
+S.heal=function(){fx('radial-gradient(circle,#0000 20%,#10b981)',.8,800);emit(0,0,8,80,2,cols.g,3.5,-.5);wave(0,.1,8,6,cols.g,1);
+if(!shield){shield=new T.Mesh(new T.IcosahedronGeometry(2.6,2),em({color:0x34d399,wireframe:true,transparent:true,opacity:.5,blending:AD,depthWrite:false}));shield.position.set(0,2,8);sc.add(shield)}};
+S.warn=function(type){warn=1;wt=type;fx('radial-gradient(circle,#0000 50%,#f59e0b99)',.6,900);emit(0,3.7,.75,60,-6,cols.r,0)};
+S.strike=function(type,sh,d){warn=0;if(sh&&shield){emit(0,2,8,60,7,cols.g);wave(0,2,8,6,cols.g);sc.remove(shield);shield=null}
+if(type===0){slam=1;after(.18,function(){wave(0,.1,0,22,cols.r,1,2.4);emit(0,.2,0,120,11,cols.r,.4);shk=Math.max(shk,1.6);after(.35,function(){pHit(d)})})}
+else if(type===1){dash=1;flash=1;emit(0,3.6,0,100,14,acc);after(.25,function(){pHit(d);emit(0,3,6,80,9,cols.w);wave(0,3,6,8,cols.w);dash=0})}
+else{for(i=0;i<6;i++)(function(i){var b=new T.Mesh(new T.ConeGeometry(.22,2.2,4),em({color:0xffffff}));b.position.set((i-2.5)*1.1,4+Math.sin(i)*1.2,1);b.rotation.x=1.571;b.userData={fly:1,t:-i*.07,x:(i-2.5)*1.1};sc.add(b);blades.push(b)})(i);after(.8,function(){pHit(d)})}};
+S.end=function(win){if(win){dying=1;ts=.2;shk=2;after(.9,function(){ts=1;dying=2;B.children.forEach(function(c){c.userData.v=new T.Vector3((Math.random()-.5)*9,Math.random()*7,(Math.random()-.5)*9)});for(var k=0;k<4;k++)wave(0,3.6,0,20+k*5,k%2?cols.y:cols.w,0,1.5+k*.3);emit(0,3.6,0,400,18,cols.y,.4);emit(0,3.6,0,200,12,cols.w);fx('#fff',1,1200);shk=2.5;zm=-3;
+var pl=new T.Mesh(new T.CylinderGeometry(.8,1.6,30,24,1,true),em({color:0xffd23f,transparent:true,opacity:.5,blending:AD,depthWrite:false,side:2}));pl.position.y=15;pl.userData={pillar:1};sc.add(pl);blades.push(pl)})}else{lost=1;fx('#7f1d1d',.9,1500)}};
+mk();S.reset();
+var ck=new T.Clock(),sy=new T.Vector3(),ik=new T.Vector3(),q=new T.Vector3();
+function loop(){if(!cv.isConnected){R.dispose();return}requestAnimationFrame(loop);var nw=performance.now();if(nw-(loop.l||0)<1000/(window.SG_FPS||60)-3)return;loop.l=nw;var rd=Math.min(ck.getDelta(),.05),dt=rd*ts;ts+=(1-ts)*Math.min(1,rd*3);t+=rd;
+aq=aq.filter(function(e){if(t>=e[0]){e[1]();return false}return true});
+acc.lerp(tgt,Math.min(1,rd*2.5));mats.forEach(function(m){m.color.copy(acc)});
+B.core.material.color.set(0xffffff).lerp(acc,.35);eyes.forEach(function(e){e.material.color.set(0xffffff)});
+var u=B.userData;rise=Math.min(1,rise+rd/2.2);var e=1-Math.pow(1-rise,3);var hov=Math.sin(t*1.6)*.35;
+warn+=0;var wv=warn;sy.set(0,0,0);
+B.position.y=(-9+9*e)+hov*(dying?0:1)+(dash?0:0);B.position.z+=((dash?6.2:0)-kb*0+(0)-B.position.z)*Math.min(1,rd*14);kb*=Math.pow(.02,rd);B.position.z-=kb*.4*dt*0;
+var sca=B.scale.x+(u.sc*(1+(lost?Math.sin(t*14)*.01:0))-B.scale.x)*Math.min(1,rd*4);if(dying!==2)B.scale.setScalar(sca);
+B.rotation.y=Math.sin(t*.7)*.12+(wv?Math.sin(t*40)*.03:0);B.rotation.x=-kb*.25;
+B.core.scale.setScalar(1+Math.sin(t*(wv?25:4))*.15+wv*.5);B.g1.scale.set(3.6+wv*3+Math.sin(t*5)*.4,3.6+wv*3+Math.sin(t*5)*.4,1);B.cage.rotation.y+=dt*(1+wv*6);B.cage.rotation.x-=dt*.7;
+core.color.copy(acc);core.intensity=2.5+wv*5+flash*6+Math.sin(t*5)*.5;core.position.set(0,B.position.y+3.7,3);
+rg3.forEach(function(r,k){r.rotation.z+=dt*(.5+k*.4+wv*4+(lvl-1)*.5)*(k%2?-1:1);r.rotation.x+=dt*.2});
+wings.forEach(function(w,k){w.rotation.z=(k?-1:1)*(.15+Math.sin(t*2.2)*.12+wv*.3);w.rotation.y=(k?1:-1)*.35});
+slam=Math.max(0,slam-rd*2.8);
+fists.forEach(function(f){var s=f.userData.s,ph=wv?1:0,up=wv*2.6;var x=s*(2.7+Math.sin(t*1.3+s)*.2-wv*.4),y=2.7+Math.cos(t*1.7+s)*.3+up-slam*(up?0:3.6)+(slam?-3*slam*(1-slam)*0:0);var z=.9+Math.sin(t*1.1)*.2+(dash?.8:0);if(slam>0){y=3.2*slam+.9*(1-slam);}
+f.position.lerp(q.set(x,y+B.position.y*0,z),Math.min(1,rd*(slam?30:10)));f.rotation.x+=dt*(2+wv*8);var sp=new T.Vector3(s*1.55,4.4,0),el=new T.Vector3(s*2.3,3.4,-.4).lerp(f.position,.3);link(f.userData.u,sp,el);link(f.userData.w,el,f.position)});
+if(dying===2){B.children.forEach(function(c){if(c.userData.v){c.position.addScaledVector(c.userData.v,dt);c.rotation.x+=dt*3;c.rotation.z+=dt*2;c.userData.v.y-=dt*4}})}
+else if(dying===1){B.position.x=(Math.random()-.5)*.35;flash=.6+Math.random()*.4}else B.position.x=0;
+flash=Math.max(0,flash-rd*3.2);bm.forEach(function(m){m.emissive.setRGB(flash,flash*.9,flash)});
+rune.rotation.z+=dt*.15;portal.rotation.z-=dt*.08*(1+lvl);portal.scale.setScalar(1+Math.sin(t)*.03+(lvl-1)*.12);
+pil.forEach(function(p,k){p.visible=true});rocks.forEach(function(r){var d=r.userData;d.a+=d.s*dt*.3;r.position.set(Math.cos(d.a)*d.d,d.h+Math.sin(t*.8+d.a*3)*.6,Math.sin(d.a)*d.d-3);r.rotation.x+=dt*.3;r.rotation.y+=dt*.2});
+for(i=0;i<300;i++){ep[i*3+1]+=dt*(.8+(i%5)*.3+lvl*.4);if(ep[i*3+1]>14)ep[i*3+1]=0}eg.attributes.position.needsUpdate=true;
+for(i=0;i<N;i++)if(pl[i]>0){pl[i]-=rd;var v=pv[i];pv[i].y+=v.g*dt*3;pp[i*3]+=v.x*dt;pp[i*3+1]+=v.y*dt;pp[i*3+2]+=v.z*dt;v.multiplyScalar(1-rd*1.2);if(pl[i]<=0)pp[i*3+1]=-99}
+pg.attributes.position.needsUpdate=true;pg.attributes.color.needsUpdate=true;
+if(Math.random()<.5+wv*.5)emit(0,B.position.y+3.7,.8,1,2+wv*8,acc,1);
+rings=rings.filter(function(r){var d=r.userData;d.t+=dt*d.sp;var k=d.t;r.scale.setScalar(.5+k*d.sz*.5);r.material.opacity=Math.max(0,1-k);if(k>=1){sc.remove(r);r.material.dispose();return false}return true});
+blades=blades.filter(function(b){var d=b.userData;if(d.fly){d.t+=rd*1.6;if(d.t<0)return true;var k=d.t;b.position.set(d.x*(1-k),4-1.8*k,1+k*8);b.rotation.z+=rd*12;if(k>=1){sc.remove(b);return false}return true}
+if(d.beam){d.t+=rd*1.8;var w=Math.max(0,1-d.t);b.scale.set(w*1.3,8,w*1.3);b.position.z=4;if(d.t>=1){sc.remove(b);return false}return true}
+if(d.pillar){d.t=(d.t||0)+rd;b.material.opacity=Math.max(0,.5-d.t*.12);b.rotation.y+=rd;if(d.t>4){sc.remove(b);return false}return true}
+d.t+=rd*5;b.scale.set(1+d.t,1,1);b.material.opacity=Math.max(0,1-d.t);if(d.t>=1){sc.remove(b);return false}return true});
+if(shield){shield.rotation.y+=dt;shield.rotation.x+=dt*.5;shield.material.opacity=.35+Math.sin(t*9)*.15}
+if(lost){zm+=(4-zm)*rd}else zm*=Math.pow(.1,rd);fv*=Math.pow(.05,rd);shk*=Math.pow(.03,rd);
+var ang=t*.22,pull=11.5+zm+(dying===2?3:0);cam.fov=52+fv+Math.sin(t*.5)*1.5;cam.updateProjectionMatrix();
+cam.position.set(Math.sin(ang)*2.6+(Math.random()-.5)*shk*K*.5,3.2+Math.sin(t*.4)*.4+(Math.random()-.5)*shk*K*.5,pull);cam.lookAt(0,3.7-(1-e)*2,0);
+lv.style.opacity=S.low?(.45+Math.sin(t*6)*.25):0;
+R.render(sc,cam)}
+S.setLow=function(v){S.low=v};loop();return S}
+
+function gBoss(g){
+  var bossMax=300,bossHp=bossMax,playerHp=100,energy=0,seconds=55,live=false,turn=0,phase=1,shield=false,attackPattern=0;
+  g.innerHTML='<div class="boss-arena" id="bossArena"><div class="boss-top"><button id="bossBack" class="pill" style="min-height:40px;padding:6px 14px;position:relative;z-index:6">← Zurück</button><span>⚔️ SIGMA RIVALRIES · ENDGEGNER</span><span class="boss-timer" id="bossTime">55</span></div><div class="boss-quote">DIE ARENA ERINNERT SICH AN JEDEN, DER HIER GESCHEITERT IST</div><div class="boss-stage"><div class="boss-villain" id="bossAvatar">👹</div></div><h2 id="bossName" style="margin:4px;color:#fde68a;text-shadow:0 0 18px #c084fc">TIMGIOH – DER AURA-KATAKLYSMUS</h2><div id="bossPhase">PHASE I · Der selbsternannte König der Arena</div><p style="margin:8px 0 3px;text-align:left;font-weight:900">👹 TIMGIOHS LEBEN <span id="bossHpNum">300 / 300</span></p><div class="boss-bar"><i id="bossChip"></i><i id="bossHpBar"></i></div><div class="boss-stats"><div>🛡️ Deine Energie <span id="bossEnergy">0</span>/100<div class="boss-bar"><i id="bossEnergyBar" style="width:0%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></i></div></div><div>❤️ Deine Lebenspunkte <span id="bossPlayerNum">100</span>/100<div class="boss-bar"><i id="bossPlayerBar" style="width:100%;background:linear-gradient(90deg,#22c55e,#a3e635)"></i></div></div></div><div class="boss-log" id="bossLog">Timgioh wartet bereits. „Du bist also der Nächste, der glaubt, diese Arena wäre nur ein Spiel…“</div><div class="boss-actions"><button id="bossAttack">⚔️ Aura-Hieb<br>+12 Energie</button><button id="bossSpecial" disabled>🌟 Sigma-Überladung<br>55 Energie</button><button id="bossHeal" disabled>💚 Not-Regeneration<br>28 Energie</button></div><div class="boss-keys">Tasten: 1 = Hieb · 2 = Überladung · 3 = Regeneration</div><button class="pill" id="bossStart" style="margin-top:14px;background:linear-gradient(135deg,#f59e0b,#dc2626);box-shadow:0 0 24px #f9731688">🔥 TIMGIOH HERAUSFORDERN</button></div>';
+  var arena=g.querySelector('#bossArena'),avatar=g.querySelector('#bossAvatar'),log=g.querySelector('#bossLog'),start=g.querySelector('#bossStart'),attack=g.querySelector('#bossAttack'),special=g.querySelector('#bossSpecial'),heal=g.querySelector('#bossHeal');
+  var stage=g.querySelector('.boss-stage'),S=null;loadThree(function(ok){if(!ok||!g.isConnected)return;try{S=boss3d(stage);arena.classList.add('has3d')}catch(e){console.warn(e);S=null;stage.querySelectorAll('.boss-cv,.boss-fl,.boss-low').forEach(function(n){n.remove()})}});
+  var gap=function(){return phase===1?4800:phase===2?4300:3800};
+  function sched(){td(function(){if(live&&S)S.warn((attackPattern+1)%3)},gap()-1400);td(function(){if(!live)return;counter();sched()},gap())}
+  document.addEventListener('keydown',function kd(e){if(!arena.isConnected){document.removeEventListener('keydown',kd);return}var b={1:attack,2:special,3:heal}[e.key];if(b&&!b.disabled)b.click()});
+  var taunts=[
+    '„Du kennst meinen Namen. Aber du kennst nicht das, was ich für diese Arena geopfert habe.“',
+    '„Jeder deiner Treffer macht mich nur wütender. Und Wut ist hier meine zweite Lebensleiste.“',
+    '„Du kämpfst um Aura. Ich BIN die Aura, die diese Spielhalle am Leben hält.“',
+    '„Florian, René, die ganze Crew – keiner hat es bis hierher geschafft. Was macht dich anders?“',
+    '„Du hörst die Arena beben? Das ist nicht der Sound. Das ist dein Mut, der gerade verschwindet.“'
+  ];
+  function bossCine(label,ultimate){
+    if(reduce)return;
+    arena.classList.remove('cinematic','ultimate-mode');void arena.offsetWidth;arena.classList.add('cinematic');
+    if(ultimate)arena.classList.add('ultimate-mode');
+    var wave=document.createElement('i');wave.className='shockwave';stage.appendChild(wave);
+    var txt=document.createElement('div');txt.className='boss-label';txt.textContent=label;stage.appendChild(txt);
+    setTimeout(function(){wave.remove();txt.remove();arena.classList.remove('cinematic','ultimate-mode')},950);
+    burst(W/2,H/2,ultimate?170:75,ultimate?2:1.2,ultimate?.4:.18);
+  }
+  function say(s){log.textContent=s;log.classList.remove('boss-flash');void log.offsetWidth;log.classList.add('boss-flash')}
+  function update(){g.querySelector('#bossHpNum').textContent=bossHp+' / '+bossMax;g.querySelector('#bossHpBar').style.width=(bossHp/bossMax*100)+'%';g.querySelector('#bossChip').style.width=(bossHp/bossMax*100)+'%';S&&S.setLow(live&&playerHp<=30);g.querySelector('#bossPlayerNum').textContent=playerHp;g.querySelector('#bossPlayerBar').style.width=playerHp+'%';g.querySelector('#bossEnergy').textContent=energy;g.querySelector('#bossEnergyBar').style.width=energy+'%';special.disabled=!live||energy<55;heal.disabled=!live||energy<28||playerHp>=100;attack.disabled=!live}
+  function finish(win){if(!live)return;live=false;stopAll();try{localStorage.removeItem('sg_boss_save')}catch(e){}S&&S.end(win);arena.classList.remove('boss-charging');attack.disabled=special.disabled=heal.disabled=true;start.textContent='🔁 REMATCH GEGEN TIMGIOH';start.disabled=false;if(win){avatar.textContent='🏆';say('Timgioh sinkt auf ein Knie. „Das… war noch nicht das Ende. Die Crew wird von dir hören.“ Du hast den Aura-Kataklysmus bezwungen! +750 Aura.');bossCine('TIMGIOH GEBROCHEN!',true);fireworks(18);rain();shake();reward(750,'🏆 Timgioh bezwungen!')}else{avatar.textContent='👹';say('Timgioh bleibt stehen. „Komm wieder, wenn du mehr als große Sprüche mitbringst.“ Die Arena hat dich besiegt.');bossCine('DEINE AURA ERLISCHT',false);shake()}update()}
+  function phaseCheck(){var pct=bossHp/bossMax;if(phase===1&&pct<=.66){phase=2;S&&S.phase(2);arena.classList.add('phase2');avatar.textContent='😈';g.querySelector('#bossPhase').textContent='PHASE II · Timgiohs wahre Aura erwacht';say('Timgioh: „Genug Aufwärmen. Jetzt siehst du, warum die anderen nicht zurückgekommen sind.“ Seine Konter werden schneller und härter.');bossCine('AURA ENTFESSELT',true);fireworks(5);shake();snd(90,.7,'sawtooth')}if(phase===2&&pct<=.33){phase=3;S&&S.phase(3);arena.classList.remove('phase2');arena.classList.add('phase3');avatar.textContent='👿';g.querySelector('#bossPhase').textContent='PHASE III · NULLPUNKT: TIMGIOHS LETZTE FORM';say('Timgioh: „Du hast mich wirklich dazu gezwungen… NULLPUNKT!“ Die Arena verdunkelt sich. Jeder Fehler kann jetzt das Ende sein.');bossCine('NULLPUNKT – FINALPHASE',true);fireworks(9);shake();snd(55,.95,'sawtooth')}}
+  function counter(){if(!live)return;turn++;attackPattern=(attackPattern+1)%3;var dmg=phase===1?11:phase===2?16:22;var lines=[
+    'Timgioh rammt seine Faust in den Boden. Eine Aura-Druckwelle trifft dich.',
+    'Timgioh verschwindet im violetten Blitz und taucht direkt vor dir wieder auf!',
+    'Timgioh zieht die Energie aus der Arena und schleudert sie als Schattenklinge zurück.'
+  ];if(phase===3&&attackPattern===2)dmg+=7;var sh=shield;if(shield){dmg=Math.ceil(dmg*.55);shield=false;lines[attackPattern]+=' Dein Regenerationsschild fängt einen Teil des Treffers ab.'}playerHp=Math.max(0,playerHp-dmg);S&&S.strike(attackPattern,sh,dmg);arena.classList.add('hit','boss-charging');setTimeout(function(){arena.classList.remove('hit','boss-charging')},520);say('💥 '+lines[attackPattern]+' −'+dmg+' Lebenspunkte.');bossCine(phase===3?'NULLPUNKT-KONTER!':'TIMGIOHS KONTER!');snd(95+phase*22,.24,'sawtooth');shake();update();if(playerHp<=0)finish(false);else if(turn%2===0)say(lines[attackPattern]+' Timgioh knurrt: „'+taunts[(turn/2)%taunts.length|0]+'“')}
+  start.onclick=function(){if(live)return;bossHp=bossMax;playerHp=100;energy=0;seconds=55;turn=0;phase=1;shield=false;attackPattern=0;live=true;arena.classList.remove('phase2','phase3','boss-charging');avatar.textContent='👹';g.querySelector('#bossPhase').textContent='PHASE I · Der selbsternannte König der Arena';g.querySelector('#bossTime').textContent=seconds;start.disabled=true;start.textContent='⚔️ KAMPF LÄUFT';say('Timgioh: „Endlich. Ich habe die Namen der Herausforderer in die Wände geritzt. Deiner kommt als Nächstes. Zeig mir, ob du mehr draufhast als die Crew.“');bossCine('DIE ARENA SCHLIESST SICH',true);S&&(S.reset(),S.intro());update();ti(function(){seconds--;var tm=g.querySelector('#bossTime');tm.textContent=seconds;tm.style.color=seconds<=10?'#f87171':'';if(seconds<=0)finish(false)},1000);sched()};
+  attack.onclick=function(){if(!live)return;var dmg=phase===1?10:phase===2?8:7;bossHp=Math.max(0,bossHp-dmg);S&&S.hit(dmg);energy=Math.min(100,energy+12);arena.classList.add('hit');setTimeout(function(){arena.classList.remove('hit')},420);burst(W/2,H/2,28,1.1,.3);snd(220+Math.random()*200,.14,'triangle');var line=taunts[(turn+Math.floor(Math.random()*taunts.length))%taunts.length];say('⚔️ Dein Aura-Hieb trifft Timgioh für '+dmg+'. Timgioh: „'+line+'“');bossCine('TREFFER −'+dmg);phaseCheck();update();if(bossHp<=0)finish(true)};
+  special.onclick=function(){if(!live||energy<55)return;energy-=55;var dmg=phase===3?38:phase===2?42:48;bossHp=Math.max(0,bossHp-dmg);S&&S.special(dmg);say('🌟 SIGMA-ÜBERLADUNG! Du bündelst deine gesamte Energie und durchbrichst Timgiohs Aura-Schild. '+dmg+' Schaden! Timgioh: „NEIN! Woher kommt diese Kraft?!“');bossCine('SIGMA-ÜBERLADUNG!',true);fireworks(7);burst(W/2,H/2,180,2,.5);snd(740,.4,'sine');phaseCheck();update();if(bossHp<=0)finish(true)};
+  heal.onclick=function(){if(!live||energy<28||playerHp>=100)return;energy-=28;var healBy=Math.min(24,100-playerHp);playerHp+=healBy;shield=true;S&&S.heal();say('💚 Not-Regeneration: +'+healBy+' Lebenspunkte. Ein Schild schwächt Timgiohs nächsten Konter. Timgioh: „Heil dich ruhig. Ich werde nicht müde.“');bossCine('NOT-REGENERATION');burst(W/2,H/2,65,1.1,.35);snd(520,.3,'sine');update()};
+  /* Vollbild, Zurück, Speichern & Fortsetzen */
+  var KEY='sg_boss_save';arena.classList.add('full');document.body.classList.add('boss-open');
+  function ld(){try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}}
+  function leave(){if(live){try{localStorage.setItem(KEY,JSON.stringify({hp:bossHp,p:playerHp,e:energy,s:seconds,ph:phase}))}catch(e){}live=false}stopAll();document.body.classList.remove('boss-open');document.removeEventListener('keydown',esc);g.innerHTML=''}
+  function esc(e){if(!arena.isConnected){document.removeEventListener('keydown',esc);document.body.classList.remove('boss-open');return}if(e.key==='Escape')leave()}
+  document.addEventListener('keydown',esc);g.querySelector('#bossBack').onclick=leave;
+  var sv0=ld();if(sv0&&sv0.hp>0){start.textContent='▶ KAMPF FORTSETZEN ('+sv0.hp+' Boss-HP)'}
+  var _s=start.onclick;start.onclick=function(){if(live)return;var sv=ld();_s();if(sv&&sv.hp>0){bossHp=sv.hp;playerHp=sv.p;energy=sv.e;seconds=sv.s;phase=sv.ph;arena.classList.remove('phase2','phase3');if(phase>1)arena.classList.add('phase'+phase);S&&S.phase(phase,1);g.querySelector('#bossPhase').textContent=['','PHASE I · Der selbsternannte König der Arena','PHASE II · Timgiohs wahre Aura erwacht','PHASE III · NULLPUNKT: TIMGIOHS LETZTE FORM'][phase];say('Der Kampf geht weiter, genau dort, wo du aufgehört hast.');update()}try{localStorage.removeItem(KEY)}catch(e){}};
+}
+
+function gType(g){var words=["SIGMA","AURA","WOLFSRUDEL","GIGACHAD","LEGENDÄR"],word=pick(words);g.innerHTML='<div class="big">⌨️ Speed-Tippen</div><p>Tippe dieses Wort so schnell du kannst:</p><div class="big" id="typeWord" style="font-size:30px"></div><input id="typeInput" placeholder="Wort hier eingeben" style="padding:12px;border-radius:10px;border:2px solid #aaa;font:700 18px system-ui"><button class="pill" id="typeCheck">Abschicken</button><div class="race-result" id="typeResult"></div>';g.querySelector("#typeWord").textContent=word;g.querySelector("#typeCheck").onclick=function(){var ok=g.querySelector("#typeInput").value.trim().toUpperCase()===word;g.querySelector("#typeResult").textContent=ok?"⚡ Perfekt! +30 Aura":"Noch nicht ganz – achte auf die Buchstaben.";if(ok){reward(30,"⌨️ Speed-Tippen!");g.querySelector("#typeCheck").disabled=true}}}
+var GAMES=[["⚡ Reaktion",gReact],["🧠 Memory",gMem],["🥊 Rizz-Duell",gDuel],["🎰 Slots",gSlot],["🧪 Sigma-Quiz",gQuiz],["🔨 Gesichter-Jagd",gWhack],["🐎 Pferderennen",gRace],["🪙 Münzwurf",gCoin],["🔮 Zahlen-Code",gGuess],["🐉 Bosskampf",gBoss],["⌨️ Speed-Tippen",gType]],tabs=$("#tabs");
+GAMES.forEach(function(x){var b=document.createElement("button");b.className="pill";b.textContent=x[0];b.onclick=function(){stopAll();G.gamesPlayed=(G.gamesPlayed||0)+1;var gd=new Date().toDateString();localStorage.setItem("sg_games_day_"+gd,(+localStorage.getItem("sg_games_day_"+gd)||0)+1);gsave();gdraw();var g=$("#gm");g.innerHTML="";x[1](g);g.animate([{transform:"scale(.9)"},{transform:"scale(1)"}],{duration:300})};tabs.appendChild(b)});
+var bd=document.createElement("button");bd.className="pill";bd.textContent="🎁 Tagesbonus";bd.onclick=function(){var d=new Date().toDateString();if(localStorage.getItem("sg_day")===d){toast("🎁 Heute schon abgeholt, komm morgen wieder!");return}localStorage.setItem("sg_day",d);fireworks(3);rain();reward(500,"🎁 Tagesbonus!")};tabs.appendChild(bd);
+var bf=document.createElement("button");bf.className="pill";bf.textContent="🎆 Feuerwerk";bf.onclick=function(){fireworks(8)};tabs.appendChild(bf);
+
+var UP=[{n:"Protein-Shake",e:"🥤",base:15,cpc:1},{n:"Eisbad",e:"🧊",base:400,cpc:5},{n:"Gym-Bro",e:"🏋️",base:100,aps:1},{n:"Grindset-Kurs",e:"📈",base:600,aps:6},{n:"Wolfsrudel",e:"🐺",base:3500,aps:30},{n:"Moai-Fabrik",e:"🗿",base:22000,aps:180},{n:"Sigma-Portal",e:"🌀",base:160000,aps:1200},{n:"Rizz-Coach",e:"😏",base:1200,aps:10},{n:"Trip-Portal",e:"👁️",base:400000,aps:3000}];
+var G={a:0,tot:0,cl:0,lv:UP.map(function(){return 0}),prestige:0,gamesPlayed:0,racesWon:0},MS=[100,1000,10000,100000,1000000],shop=$("#shop"),ub=[];
+try{var sg=JSON.parse(localStorage.getItem("sigma_game")||"null");if(sg&&sg.lv){while(sg.lv.length<UP.length)sg.lv.push(0);G=Object.assign(G,sg)}}catch(e){}
+function fmt(n){if(n<1000)return Math.floor(n)+"";var u=["K","M","B","T","Q"],i=-1;while(n>=1000&&i<4){n/=1000;i++}return n.toFixed(n<10?2:1)+u[i]}
+function cost(i){return Math.ceil(UP[i].base*Math.pow(1.15,G.lv[i]))}
+function mult(){return 1+(G.prestige||0)*.25}
+function cpc(){return (UP.reduce(function(s,u,i){return s+(u.cpc||0)*G.lv[i]},1))*mult()}
+function aps(){return UP.reduce(function(s,u,i){return s+(u.aps||0)*G.lv[i]},0)*mult()}
+UP.forEach(function(u,i){var b=document.createElement("button");b.className="up";b.innerHTML='<span class="ic">'+u.e+'</span><span><span class="nm"></span><small></small></span><b class="pr"></b>';b.querySelector(".nm").textContent=u.n;b.querySelector("small").textContent=u.cpc?"+"+u.cpc+" Aura pro Klick":"+"+u.aps+" Aura pro Sekunde";b.onclick=function(){var c=cost(i);if(G.a<c)return;G.a-=c;G.lv[i]++;snd(500+i*80,.12,"triangle");burst(b.getBoundingClientRect().left+30,b.getBoundingClientRect().top+20,25,.7);gsave();gdraw()};shop.appendChild(b);ub.push(b)});
+function gdraw(){$("#at").textContent=fmt(G.a)+" ✨";var meta=$("#meta");if(meta){var day=new Date().toDateString(),done=localStorage.getItem("sg_mission_"+day)==="1",dailyClicks=+localStorage.getItem("sg_clicks_day_"+day)||0,dailyGames=+localStorage.getItem("sg_games_day_"+day)||0,dailyRaces=+localStorage.getItem("sg_races_day_"+day)||0,clickGoal=dailyClicks>=100,gameGoal=dailyGames>=3,raceGoal=dailyRaces>=1;meta.innerHTML='<div class="race-meta"><b>⭐ Sigma-Level '+(1+(G.prestige||0))+'</b><b>✨ Multiplikator x'+mult().toFixed(2)+'</b><b>🏆 Gesamt-Aura '+fmt(G.tot)+'</b></div><p>🎯 Tagesmissionen: Erreiche 100 Clicks, spiele 3 Modi und gewinne ein Pferderennen.</p><div style="text-align:left;line-height:2">'+(clickGoal?'✅':'⬜')+' 100 Clicks ('+Math.min(100,dailyClicks)+'/100)<br>'+(gameGoal?'✅':'⬜')+' 3 Spiele ('+Math.min(3,dailyGames)+'/3)<br>'+(raceGoal?'✅':'⬜')+' 1 Rennsieg ('+Math.min(1,dailyRaces)+'/1)</div><button class="pill" id="missionClaim" '+((done||!(clickGoal&&gameGoal&&raceGoal))?'disabled':'')+'>🎁 Mission abschließen (+750 Aura)</button><hr><p>♻️ Prestige: Setzt deinen Clicker zurück und gibt dauerhaft +25 % Aura-Multiplikator. Voraussetzung: 100.000 Gesamt-Aura.</p><button class="pill" id="prestigeBtn" '+(G.tot<100000?'disabled':'')+'>♻️ Prestige aktivieren</button><p class="sub">Prestige-Stufe: '+(G.prestige||0)+'</p>';meta.querySelector('#missionClaim').onclick=function(){if(localStorage.getItem("sg_mission_"+day)==="1"||!(clickGoal&&gameGoal&&raceGoal))return;localStorage.setItem("sg_mission_"+day,"1");reward(750,"🎁 Tagesmission geschafft!")};meta.querySelector('#prestigeBtn').onclick=function(){if(G.tot<100000||!confirm('Prestige starten? Aura und Clicker-Upgrades werden zurückgesetzt.'))return;G.prestige=(G.prestige||0)+1;G.a=0;G.tot=0;G.cl=0;G.lv=UP.map(function(){return 0});gsave();gdraw();fireworks(8);toast('♻️ Prestige '+G.prestige+'! Multiplikator erhöht.')};}$("#aps").textContent=fmt(aps())+" Aura pro Sekunde · "+fmt(cpc())+" pro Klick";$("#acl").textContent=G.cl+" Klicks gesamt";
+  ub.forEach(function(b,i){b.querySelector("small").nextSibling;b.disabled=G.a<cost(i);b.querySelector(".pr").textContent=fmt(cost(i))+" ✨ (Lv "+G.lv[i]+")"})}
+function gsave(){try{localStorage.setItem("sigma_game",JSON.stringify(G))}catch(e){}}
+function gain(n){n=n*mult();var before=G.tot;G.a+=n;G.tot+=n;MS.forEach(function(m){if(before<m&&G.tot>=m){fireworks(4);toast("🏅 "+fmt(m)+" Aura insgesamt erreicht!")}})}
+$("#orb").addEventListener("pointerdown",function(e){var v=cpc();G.cl++;var cd=new Date().toDateString();localStorage.setItem("sg_clicks_day_"+cd,(+localStorage.getItem("sg_clicks_day_"+cd)||0)+1);gain(v);snd(250+Math.random()*300,.06);
+  var f=document.createElement("span");f.textContent="+"+fmt(v);f.style.cssText="position:fixed;z-index:90;pointer-events:none;font:900 26px system-ui;color:#ffe14d;text-shadow:0 2px 4px #000;left:"+(e.clientX-14)+"px;top:"+(e.clientY-20)+"px";document.body.appendChild(f);
+  f.animate([{transform:"translateY(0)",opacity:1},{transform:"translateY(-90px)",opacity:0}],{duration:900}).onfinish=function(){f.remove()};gdraw()});
+setInterval(function(){var p=aps();if(p>0){gain(p/10);gdraw()}},100);setInterval(gsave,5000);
+function goldenSpawn(){setTimeout(function(){var g=document.createElement("button");g.className="gold";g.textContent="⭐";g.setAttribute("aria-label","Goldene Aura");g.style.left=(10+Math.random()*80)+"%";g.style.top=(15+Math.random()*65)+"%";
+  var t=setTimeout(function(){g.remove()},9000);g.onclick=function(){clearTimeout(t);var bonus=Math.max(100,aps()*60);gain(bonus);g.remove();fireworks(5);rain();toast("⭐ Goldene Aura! +"+fmt(bonus));gdraw();gsave()};document.body.appendChild(g);goldenSpawn()},30000+Math.random()*30000)}
+goldenSpawn();
+$("#aReset").onclick=function(){if(confirm("Aura-Spielstand wirklich löschen?")){G={a:0,tot:0,cl:0,lv:UP.map(function(){return 0}),prestige:0,gamesPlayed:0,racesWon:0};gsave();gdraw()}};
+gdraw();
+var kk="ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba",kb="";addEventListener("keydown",function(e){kb=(kb+e.key).slice(-kk.length);if(kb===kk){document.body.classList.add("party");fireworks(10);rain();toast("🕹️ Geheimer Sigma-Modus aktiviert!")}});
+
+/* ---------- Admin ---------- */
+var admOpen=false,isAdmin=sessionStorage.getItem("sigma_adm")==="1",mo=$("#mo"),box=$("#box");
+function openMo(){mo.classList.add("on")}function closeMo(){mo.classList.remove("on");admOpen=false}
+mo.addEventListener("pointerdown",function(e){if(e.target===mo)closeMo()});
+$("#fab").onclick=function(){if(isAdmin){admOpen=true;drawAdmin();openMo()}else loginUI()};
+function loginUI(){box.innerHTML='<h4>🔐 Admin-Login</h4><input id="ln" placeholder="Name" autocomplete="username"><input id="lc" type="password" placeholder="Code" autocomplete="current-password"><div class="row"><button class="pill" id="lg">Einloggen</button><button class="pill" id="lx">Schließen</button></div>';openMo();
+  $("#lx").onclick=closeMo;$("#lg").onclick=function(){if($("#ln").value===C.adminName&&$("#lc").value===C.adminCode){isAdmin=true;sessionStorage.setItem("sigma_adm","1");admOpen=true;drawAdmin();toast("✅ Eingeloggt");fireworks(2)}else{toast("❌ Falsche Daten");box.animate([{transform:"translateX(-10px)"},{transform:"translateX(10px)"},{transform:"translateX(0)"}],{duration:300})}}}
+var selP=0;
+function drawAdmin(){
+  var r=counts(),h='<h4>🛠️ Admin-Panel</h4><div class="row"><label><input type="checkbox" id="ao" style="width:auto"'+(S.set.open?" checked":"")+'> Abstimmung offen</label></div><input id="an" placeholder="Ankündigung (leer = keine)">';
+  h+='<h4>Stimmen ändern</h4>';N.forEach(function(n,i){h+='<div class="row"><span>'+n+': <b>'+r.c[n]+'</b></span><span><button class="pill" data-m="'+i+'">−1</button> <button class="pill" data-p="'+i+'">+1</button></span></div>'});
+  h+='<h4>Einzelne Stimmen löschen</h4><div class="vl" id="vl"></div><h4>Profil bearbeiten</h4><select id="sp">'+N.map(function(n,i){return'<option value="'+i+'"'+(i===selP?" selected":"")+'>'+n+'</option>'}).join("")+'</select><div id="pf"></div>';
+  h+='<div class="row"><button class="pill" id="ex">📤 Export</button><button class="pill" id="rs" style="background:#ff3b6b">🗑️ Alles zurücksetzen</button></div><div class="row"><button class="pill" id="lo">Ausloggen</button><button class="pill" id="lx">Schließen</button></div>';
+  var keep=document.activeElement&&document.activeElement.id;box.innerHTML=h;
+  var an=$("#an");an.value=S.set.note||"";
+  var vl=$("#vl");Object.keys(S.votes).sort(function(a,b){return(S.votes[b].t||0)-(S.votes[a].t||0)}).forEach(function(k){var d=document.createElement("div");d.className="row";var s=document.createElement("span");s.textContent=S.votes[k].c+" · "+new Date(S.votes[k].t||0).toLocaleString("de-DE");var b=document.createElement("button");b.className="pill";b.textContent="Löschen";b.onclick=function(){store.delVote(k)};d.appendChild(s);d.appendChild(b);vl.appendChild(d)});
+  if(!Object.keys(S.votes).length)vl.textContent="Keine Stimmen.";
+  var p=prof(N[selP]),pf=$("#pf"),F=["emoji","nick","origin","age","hobby","quote","power","favoriteGame","role","strength","signatureMove","bestMoment","rival","chapter","backstory","rivalryStory","allies","ultimate","weakness","entrance"].concat(STAT);
+  F.forEach(function(k){var i=document.createElement("input");i.placeholder=k;i.title=k;i.dataset.k=k;i.value=p[k];pf.appendChild(i)});
+  var sv=document.createElement("button");sv.className="pill";sv.textContent="💾 Profil speichern";sv.onclick=function(){var o={};pf.querySelectorAll("input").forEach(function(i){o[i.dataset.k]=STAT.indexOf(i.dataset.k)>-1?Math.max(0,Math.min(100,+i.value||0)):i.value});store.setProf(N[selP],o);toast("💾 Gespeichert")};pf.appendChild(sv);
+  $("#sp").onchange=function(e){selP=+e.target.value;drawAdmin()};
+  $("#ao").onchange=function(e){store.setSet({open:e.target.checked,note:S.set.note||""})};
+  an.onchange=function(){store.setSet({open:S.set.open,note:an.value})};
+  box.querySelectorAll("[data-m]").forEach(function(b){b.onclick=function(){var n=N[+b.dataset.m];store.setAdj(n,((S.adj[n]||{}).d||0)-1)}});
+  box.querySelectorAll("[data-p]").forEach(function(b){b.onclick=function(){var n=N[+b.dataset.p];store.setAdj(n,((S.adj[n]||{}).d||0)+1)}});
+  $("#ex").onclick=function(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,2)],{type:"application/json"}));a.download="sigma-export.json";a.click()};
+  $("#rs").onclick=function(){if(confirm("Wirklich ALLE Stimmen und Korrekturen löschen?"))store.reset()};
+  $("#lo").onclick=function(){isAdmin=false;sessionStorage.removeItem("sigma_adm");closeMo()};$("#lx").onclick=closeMo}
+
+/* ---------- Speicher: Firebase oder lokal ---------- */
+function localStore(){var K="sigma_local";try{var d=JSON.parse(localStorage.getItem(K)||"null");if(d)S=d}catch(e){}
+  function sv(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}render()}
+  addEventListener("storage",function(e){if(e.key===K){try{S=JSON.parse(e.newValue)}catch(x){}render()}});
+  $("#st").textContent="📴 Demo-Modus: Stimmen sind nur in diesem Browser sichtbar (Firebase in config.js eintragen, siehe README).";
+  return{vote:function(id,c){S.votes[id]={c:c,t:Date.now()};sv()},delVote:function(id){delete S.votes[id];sv()},setAdj:function(n,d){S.adj[n]={d:d};sv()},setProf:function(n,o){S.prof[n]=o;sv()},setSet:function(o){S.set=o;sv()},reset:function(){S.votes={};S.adj={};sv()}}}
+async function fbStore(){
+  var B="https://www.gstatic.com/firebasejs/10.12.2/",A=await import(B+"firebase-app.js"),F=await import(B+"firebase-firestore.js"),db=F.getFirestore(A.initializeApp(C.firebase));
+  ["votes","adj","prof","set"].forEach(function(k){F.onSnapshot(F.collection(db,k),function(s){var o={};s.forEach(function(d){o[d.id]=d.data()});if(k==="set")S.set=o.main||{open:true,note:""};else S[k]=o;$("#st").textContent="🟢 Live: Alle sehen dieselben Stimmen.";render()},function(){$("#st").textContent="⚠️ Verbindung zu Firebase fehlgeschlagen (Regeln/Config prüfen)."})});
+  return{vote:function(id,c){return F.setDoc(F.doc(db,"votes",id),{c:c,t:Date.now()}).catch(function(){toast("⚠️ Speichern fehlgeschlagen")})},delVote:function(id){return F.deleteDoc(F.doc(db,"votes",id))},setAdj:function(n,d){return F.setDoc(F.doc(db,"adj",n),{d:d})},setProf:function(n,o){return F.setDoc(F.doc(db,"prof",n),o)},setSet:function(o){return F.setDoc(F.doc(db,"set","main"),o)},
+    reset:function(){Object.keys(S.votes).forEach(function(k){F.deleteDoc(F.doc(db,"votes",k))});Object.keys(S.adj).forEach(function(k){F.deleteDoc(F.doc(db,"adj",k))})}}}
+(async function(){try{store=C.firebase?await fbStore():localStore()}catch(e){store=localStore();toast("⚠️ Firebase nicht erreichbar, Demo-Modus")}render()})();
+store=store||{vote:function(){},delVote:function(){},setAdj:function(){},setProf:function(){},setSet:function(){},reset:function(){}};
+render();
+})();
+</script>
+<script src="config.js"></script>
+<script src="online.js"></script>
+<script src="settings.js"></script>
+</body>
+</html>
